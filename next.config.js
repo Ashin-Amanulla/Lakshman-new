@@ -6,7 +6,13 @@ const nextConfig = {
     },
     reactStrictMode: true,
     images: {
-        domains: ['images.unsplash.com'], // Add any image domains you're using
+        domains: ['localhost'],
+        unoptimized: true
+    },
+    // Disable page optimization during build to prevent prerender errors
+    experimental: {
+        workerThreads: false,
+        cpus: 1
     },
     // PostCSS configuration
     postcss: {
