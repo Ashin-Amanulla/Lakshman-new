@@ -1,0 +1,124 @@
+/* Flexbox utilities */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Text utilities */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Position utilities */
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-container);
+}
+
+/* Typography */
+.heading-display {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-display);
+  color: var(--color-primary);
+}
+
+.heading-1 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h1);
+  color: var(--color-primary);
+}
+
+/* Add more heading styles as needed */
+
+/* Section Spacing */
+.section {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+}
+
+.section--sm {
+  padding-top: calc(var(--spacing-section) * 0.5);
+  padding-bottom: calc(var(--spacing-section) * 0.5);
+}
+
+/* Aspect Ratios */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* Link Styles */
+.btn-link {
+  color: var(--color-secondary);
+  font-weight: 500;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-link:hover {
+  color: var(--color-secondary-dark);
+  transform: translateX(4px);
+}
+
+/* Spacing Utilities */
+.gap-0 {
+  gap: 0;
+}
+.gap-1 {
+  gap: var(--spacing-xs);
+}
+.gap-2 {
+  gap: var(--spacing-sm);
+}
+.gap-3 {
+  gap: var(--spacing-md);
+}
+.gap-4 {
+  gap: var(--spacing-lg);
+}
+.gap-5 {
+  gap: var(--spacing-xl);
+}
+
+/* Margin Utilities */
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: var(--spacing-xs);
+}
+.mb-2 {
+  margin-bottom: var(--spacing-sm);
+}
+.mb-3 {
+  margin-bottom: var(--spacing-md);
+}
+.mb-4 {
+  margin-bottom: var(--spacing-lg);
+}
+.mb-5 {
+  margin-bottom: var(--spacing-xl);
+}

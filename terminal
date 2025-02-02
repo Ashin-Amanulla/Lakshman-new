@@ -1,0 +1,4 @@
+mkdir -p src/components/layout
+touch src/components/layout/Header.js
+touch src/components/layout/Footer.js 
+npm install sass 

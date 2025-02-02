@@ -1,0 +1,25 @@
+sladvocates/
+├── src/
+│   ├── app/
+│   │   ├── layout.js
+│   │   └── page.js
+│   │   
+│   ├── components/
+│   │   ├── ui/
+│   │   │   ├── Button.js
+│   │   │   └── Card.js
+│   │   ├── layout/
+│   │   │   ├── Header.js
+│   │   │   ├── Footer.js
+│   │   │   └── Navbar.js
+│   │   └── sections/
+│   │       ├── Hero.js
+│   │       ├── About.js
+│   │       ├── PracticeAreas.js
+│   │       ├── Team.js
+│   │       └── Contact.js
+│   └── store/
+│       └── store.js
+├── public/
+│   └── images/
+└── .env 

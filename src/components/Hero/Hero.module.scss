@@ -1,0 +1,17 @@
+@import '@/styles/theme/index.scss';
+
+.hero {
+    &__title {
+        font-size: map-get($font-sizes, display);
+        color: map-get($colors, primary, DEFAULT);
+
+        @include responsive(md) {
+            font-size: map-get($font-sizes, h1);
+        }
+    }
+
+    &__button {
+        @include button-base;
+        background-color: map-get($colors, secondary, DEFAULT);
+    }
+}
