@@ -9,18 +9,11 @@ module.exports = {
         'postcss-preset-env': {
             stage: 3,
             features: {
-                'custom-properties': false
+                'nesting-rules': true
             }
         },
-        ...(process.env.NODE_ENV === 'production' ? {
-            cssnano: {
-                preset: ['default', {
-                    discardComments: {
-                        removeAll: true,
-                    },
-                    normalizeWhitespace: false,
-                }],
-            },
-        } : {}),
+        cssnano: {
+            preset: 'default',
+        },
     },
 } 
