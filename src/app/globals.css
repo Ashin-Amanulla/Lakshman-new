@@ -1,214 +1,333 @@
 /* ==========================================================================
-   Base Tailwind Imports
+   Tailwind CSS Imports
    ========================================================================== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ==========================================================================
-   Custom Properties / Variables
-   ========================================================================== */
-:root {
-  /* Colors */
-  --color-primary: #1a365d;
-  --color-primary-light: #2a4a7f;
-  --color-secondary: #2563eb;
-  --color-secondary-light: #3b82f6;
-  --color-text: #1f2937;
-  --color-text-light: #6b7280;
-  --color-background: #f5f5f0;
-  --color-background-light: #ffffff;
-  --color-background-dark: #e8e8e0;
-
-  /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
-
-  /* Border Radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 1rem;
-  --radius-full: 9999px;
-
-  /* Transitions */
-  --transition-base: 0.2s ease-in-out;
-  --transition-slow: 0.3s ease-in-out;
-}
-
-/* ==========================================================================
-   Base Styles
+   Modern CSS Variables for Light/Dark Mode Support
    ========================================================================== */
 @layer base {
+  :root {
+    /* Animation durations */
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 350ms;
+
+    /* Custom easings */
+    --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+    --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+
+    /* Z-index scale */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+  }
+
+  /* Base HTML elements */
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply font-sans text-text bg-background;
-    font-family: var(--font-body);
+    @apply bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900;
   }
 
-  /* Heading Styles */
+  /* Typography improvements */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-heading tracking-tight text-primary;
+    @apply text-balance;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-500;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-400;
   }
 }
 
 /* ==========================================================================
-   Component Styles
+   Modern Component Classes
    ========================================================================== */
 @layer components {
-  /* Container */
+  /* Container with responsive padding */
   .container {
-    @apply max-w-7xl mx-auto px-4;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Typography */
-  .heading-1 {
-    @apply text-4xl md:text-5xl font-bold tracking-tight;
+  .container-sm {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .heading-2 {
-    @apply text-3xl md:text-4xl font-bold tracking-tight;
+  /* Modern Typography Scale */
+  .heading-display {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900;
   }
 
-  .heading-3 {
-    @apply text-2xl md:text-3xl font-bold tracking-tight;
+  .heading-h1 {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900;
   }
 
-  /* Buttons */
+  .heading-h2 {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900;
+  }
+
+  .heading-h3 {
+    @apply text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-neutral-900;
+  }
+
+  .heading-h4 {
+    @apply text-lg sm:text-xl font-semibold tracking-tight text-neutral-900;
+  }
+
+  .text-lead {
+    @apply text-lg sm:text-xl text-neutral-600 leading-relaxed;
+  }
+
+  .text-body {
+    @apply text-base text-neutral-700 leading-relaxed;
+  }
+
+  .text-small {
+    @apply text-sm text-neutral-600;
+  }
+
+  /* Modern Button System */
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-base;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
   }
 
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-primary/90;
+    @apply btn bg-primary-500 text-white hover:bg-primary-600 focus-visible:ring-primary-500 shadow-sm hover:shadow-md;
   }
 
   .btn-secondary {
-    @apply btn bg-secondary text-white hover:bg-secondary/90;
+    @apply btn bg-secondary-500 text-white hover:bg-secondary-600 focus-visible:ring-secondary-500 shadow-sm hover:shadow-md;
   }
 
   .btn-outline {
-    @apply btn border-2 border-current hover:bg-primary hover:text-white;
+    @apply btn border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white focus-visible:ring-primary-500;
   }
 
-  /* Forms */
-  .form-group {
-    @apply mb-4;
+  .btn-ghost {
+    @apply btn text-neutral-700 hover:bg-neutral-100 focus-visible:ring-neutral-500;
   }
 
-  .form-label {
-    @apply block text-sm font-medium text-text mb-2;
-  }
-
-  .form-input {
-    @apply w-full px-4 py-2 rounded-lg border border-text/10 
-           focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary
-           placeholder:text-text-light/60;
-  }
-
-  /* Cards */
+  /* Modern Card System */
   .card {
-    @apply bg-white rounded-lg shadow-sm overflow-hidden transition-shadow duration-300;
+    @apply bg-white rounded-2xl shadow-soft border border-neutral-200/50 overflow-hidden transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-medium hover:-translate-y-1;
   }
 
   .card-body {
     @apply p-6;
   }
 
-  .card:hover {
-    @apply shadow-md;
+  .card-header {
+    @apply p-6 pb-0;
+  }
+
+  .card-footer {
+    @apply p-6 pt-0;
+  }
+
+  /* Form Elements */
+  .form-group {
+    @apply space-y-2;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-neutral-700;
+  }
+
+  .form-input {
+    @apply block w-full px-4 py-3 text-neutral-900 bg-white border border-neutral-300 rounded-xl shadow-sm placeholder:text-neutral-400 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 transition-colors;
+  }
+
+  .form-textarea {
+    @apply form-input min-h-[120px] resize-y;
+  }
+
+  .form-select {
+    @apply form-input pr-10 bg-no-repeat bg-right bg-[length:16px_16px] bg-[position:right_12px_center];
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  }
+
+  /* Utility Classes */
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+
+  .section-padding-sm {
+    @apply py-12 lg:py-16;
+  }
+
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  /* Animation Classes */
+  .animate-in {
+    @apply opacity-0 translate-y-4;
+    animation: slide-in var(--duration-slow) var(--ease-out-cubic) forwards;
+  }
+
+  .animate-in-delay-1 {
+    animation-delay: 100ms;
+  }
+
+  .animate-in-delay-2 {
+    animation-delay: 200ms;
+  }
+
+  .animate-in-delay-3 {
+    animation-delay: 300ms;
+  }
+
+  /* Loading states */
+  .loading-skeleton {
+    @apply bg-neutral-200 animate-pulse rounded;
+  }
+
+  .loading-shimmer {
+    @apply relative overflow-hidden bg-neutral-200 rounded;
+  }
+
+  .loading-shimmer::after {
+    @apply absolute inset-0 -translate-x-full;
+    content: "";
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Backdrop blur utilities */
+  .backdrop-blur-glass {
+    @apply backdrop-blur-md bg-white/80;
+  }
+
+  .backdrop-blur-glass-dark {
+    @apply backdrop-blur-md bg-neutral-900/80;
   }
 }
 
 /* ==========================================================================
-   Utility Classes
+   Custom Animations
    ========================================================================== */
-@layer utilities {
-  /* Text Balance */
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Font Weights for Headings */
-  .heading-light {
-    @apply font-light;
-  }
-
-  .heading-regular {
-    @apply font-normal;
-  }
-
-  .heading-medium {
-    @apply font-medium;
-  }
-
-  .heading-semibold {
-    @apply font-semibold;
-  }
-
-  .heading-bold {
-    @apply font-bold;
-  }
-
-  /* Animations */
-  .animate-fade {
-    animation: fade 0.3s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
-  }
-}
-
-/* ==========================================================================
-   Animations
-   ========================================================================== */
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
+@keyframes slide-in {
   to {
     opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
     transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
     opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
   }
 }
 
 /* ==========================================================================
-   Media Queries
+   Responsive Design Improvements
    ========================================================================== */
-@media (max-width: 768px) {
-  :root {
-    /* Adjust spacing for mobile */
-    --spacing-xl: 1.5rem;
-    --spacing-2xl: 2rem;
-  }
-
+@media (max-width: 640px) {
   .container {
     @apply px-4;
+  }
+
+  .btn {
+    @apply w-full justify-center;
+  }
+
+  .section-padding {
+    @apply py-12;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    @apply text-neutral-900 bg-white;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

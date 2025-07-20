@@ -1,90 +1,280 @@
-"use client"
+"use client";
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import { CheckCircleIcon } from '@heroicons/react/24/outline'
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ScaleIcon,
+  AcademicCapIcon,
+  TrophyIcon,
+  UserGroupIcon,
+  CheckCircleIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/outline";
 
-const highlights = [
-  "25+ Years of Legal Excellence",
-  "Comprehensive Legal Solutions",
-  "Client-Centric Approach",
-  "Proven Track Record"
-]
+const stats = [
+  {
+    number: "25+",
+    label: "Years Experience",
+    description: "Serving clients with dedication since 1999",
+    icon: TrophyIcon,
+  },
+  {
+    number: "1000+",
+    label: "Cases Won",
+    description: "Successful legal outcomes across practice areas",
+    icon: CheckCircleIcon,
+  },
+  {
+    number: "50+",
+    label: "Legal Experts",
+    description: "Experienced advocates and legal professionals",
+    icon: UserGroupIcon,
+  },
+  {
+    number: "98%",
+    label: "Success Rate",
+    description: "Track record of favorable case resolutions",
+    icon: ScaleIcon,
+  },
+];
+
+const achievements = [
+  {
+    year: "2023",
+    title: "Best Law Firm Award",
+    description:
+      "Recognized for excellence in legal services by Kerala Bar Association",
+  },
+  {
+    year: "2022",
+    title: "Legal Innovation Award",
+    description:
+      "Honored for implementing modern legal practices and client service",
+  },
+  {
+    year: "2021",
+    title: "Community Service Recognition",
+    description:
+      "Acknowledged for pro bono work and legal awareness initiatives",
+  },
+];
+
+function CountUpNumber({ target, duration = 2000, inView }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+
+    let startTime = null;
+    const startValue = 0;
+    const endValue = parseInt(target.replace(/[^0-9]/g, ""));
+
+    function animate(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+
+      setCount(Math.floor(progress * endValue));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }, [target, duration, inView]);
+
+  return <span>{target.includes("%") ? `${count}%` : `${count}+`}</span>;
+}
 
 export default function About() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, threshold: 0.3 });
+
   return (
-    <section className="py-20 bg-background">
+    <section
+      id="stats-section"
+      className="section-padding bg-gradient-to-b from-white to-neutral-50"
+      ref={ref}
+    >
       <div className="container">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image Column */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="relative"
-          >
-            <div className="relative h-[600px] rounded-lg overflow-hidden">
-              <Image
-                src="/images/about-main.jpg"
-                alt="Law Office Interior"
-                fill
-                className="object-cover"
-              />
-            </div>
-            {/* Floating Stats Card */}
-            <div className="absolute -right-8 bottom-12 bg-white p-6 rounded-lg shadow-xl max-w-[240px]">
-              <div className="text-4xl font-heading text-primary mb-2">98%</div>
-              <div className="text-text-light text-sm">Success Rate in Complex Legal Cases</div>
-            </div>
-          </motion.div>
+        {/* Stats Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <h2 className="heading-h2 mb-6">Trusted by Thousands</h2>
+          <p className="text-lead max-w-3xl mx-auto">
+            Our proven track record speaks for itself. With decades of
+            experience and unwavering commitment to justice, we've built a
+            reputation as Kerala's premier legal firm.
+          </p>
+        </motion.div>
 
-          {/* Content Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h2 className="text-sm font-semibold text-secondary uppercase tracking-wider mb-3">
-              About Our Firm
-            </h2>
-            <h3 className="text-4xl font-heading text-primary mb-6">
-              A Legacy of Legal Excellence Since 1998
-            </h3>
-            <div className="w-20 h-1 bg-secondary mb-8" />
-            
-            <p className="text-text-light mb-8">
-              SL Advocates has been at the forefront of legal innovation and excellence for over two decades. 
-              Our commitment to delivering exceptional legal services is matched only by our dedication to 
-              our clients' success. With a team of experienced attorneys and a comprehensive understanding 
-              of various legal domains, we provide strategic solutions to complex legal challenges.
-            </p>
-
-            {/* Highlights */}
-            <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              {highlights.map((item, index) => (
-                <div 
-                  key={item}
-                  className="flex items-center space-x-3"
-                >
-                  <CheckCircleIcon className="w-5 h-5 text-secondary" />
-                  <span className="text-text">{item}</span>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.1, duration: 0.8 }}
+              className="card-hover text-center group"
+            >
+              <div className="card-body space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center mx-auto group-hover:bg-primary-500 transition-colors duration-300">
+                  <stat.icon className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-300" />
                 </div>
+                <div>
+                  <div className="text-4xl font-bold text-primary-600 mb-2">
+                    <CountUpNumber target={stat.number} inView={isInView} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+                    {stat.label}
+                  </h3>
+                  <p className="text-small text-neutral-600">
+                    {stat.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* About Section */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Column - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="space-y-8"
+          >
+            <div className="space-y-6">
+              <div>
+                <span className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-4">
+                  About SL Advocates
+                </span>
+                <h2 className="heading-h2">
+                  Leading Legal Excellence in Kerala
+                </h2>
+              </div>
+
+              <div className="space-y-4 text-body">
+                <p>
+                  Established in 1999, SL Advocates has grown to become one of
+                  Kerala's most respected legal firms. Our commitment to
+                  providing exceptional legal services with integrity and
+                  expertise has earned us the trust of thousands of clients.
+                </p>
+                <p>
+                  We specialize in a comprehensive range of legal services, from
+                  complex civil litigation to corporate law, family matters, and
+                  property transactions. Our team of seasoned legal
+                  professionals brings decades of combined experience to every
+                  case.
+                </p>
+                <p>
+                  At SL Advocates, we believe that quality legal representation
+                  should be accessible, transparent, and results-driven. We work
+                  tirelessly to protect our clients' interests while maintaining
+                  the highest standards of professional excellence.
+                </p>
+              </div>
+            </div>
+
+            {/* Key Features */}
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                "Supreme Court Practice",
+                "High Court Representation",
+                "24/7 Legal Support",
+                "Multilingual Services",
+              ].map((feature, index) => (
+                <motion.div
+                  key={feature}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
+                  className="flex items-center gap-3"
+                >
+                  <CheckCircleIcon className="w-5 h-5 text-primary-500 flex-shrink-0" />
+                  <span className="text-sm font-medium text-neutral-700">
+                    {feature}
+                  </span>
+                </motion.div>
               ))}
             </div>
 
-            {/* Mission Statement */}
-            <div className="bg-primary/5 border-l-4 border-secondary p-6 rounded">
-              <h4 className="font-heading text-primary text-xl mb-3">Our Mission</h4>
-              <p className="text-text-light">
-                To provide exceptional legal services with integrity and professionalism, 
-                while maintaining the highest standards of legal excellence and ethical conduct.
-              </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.7, duration: 0.8 }}
+            >
+              <Link href="/team" className="btn-primary group">
+                Meet Our Team
+                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Column - Image and Achievements */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="space-y-8"
+          >
+            {/* Image */}
+            <div className="relative rounded-3xl overflow-hidden shadow-large">
+              <Image
+                src="/images/asokha.webp"
+                alt="SL Advocates Office"
+                width={600}
+                height={400}
+                className="w-full h-80 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/20 to-transparent" />
+            </div>
+
+            {/* Achievements Timeline */}
+            <div className="space-y-6">
+              <h3 className="heading-h4">Recent Achievements</h3>
+              <div className="space-y-4">
+                {achievements.map((achievement, index) => (
+                  <motion.div
+                    key={achievement.year}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
+                    className="flex gap-4 p-4 bg-white rounded-xl border border-neutral-200 hover:border-primary-200 hover:shadow-soft transition-all duration-300"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-accent-100 flex items-center justify-center flex-shrink-0">
+                      <AcademicCapIcon className="w-6 h-6 text-accent-600" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-semibold text-neutral-900">
+                          {achievement.title}
+                        </h4>
+                        <span className="text-xs px-2 py-1 bg-primary-100 text-primary-700 rounded-full">
+                          {achievement.year}
+                        </span>
+                      </div>
+                      <p className="text-small text-neutral-600">
+                        {achievement.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
       </div>
     </section>
-  )
-} 
+  );
+}
