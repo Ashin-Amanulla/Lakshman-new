@@ -11,7 +11,7 @@ const navigation = [
   { name: "Practice Areas", href: "/practice-areas" },
   { name: "Our Team", href: "/team" },
   { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
+  // { name: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
@@ -85,7 +85,7 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Link href="/consultation" className="btn-primary btn-sm ml-4">
+            <Link href="/contact" className="btn-primary btn-sm ml-4">
               Get Consultation
             </Link>
           </nav>

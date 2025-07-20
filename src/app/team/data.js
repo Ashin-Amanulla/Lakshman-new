@@ -2,7 +2,7 @@ export const team = [
     {
         name: "Adv. Lakshman RS",
         role: "Managing Partner",
-        image: "/images/lak.jpg",
+        image: "/images/WFV_1209.JPG",
         education: [
             "LLM, National Law University, Delhi",
             "Specialized in Corporate Law"
@@ -40,7 +40,7 @@ export const team = [
     {
         name: "Adv. Rahul Menon",
         role: "Partner",
-        image: "/images/lak.jpg",
+        image: "/images/WFV_1155.JPG",
         education: [
             "LLB, Kerala Law Academy",
             "Diploma in Criminal Law"
@@ -59,7 +59,26 @@ export const team = [
     {
         name: "Adv. Priya Kumar",
         role: "Associate",
-        image: "/images/lak.jpg",
+        image: "/images/WFV_1242.JPG",
+        education: [
+            "LLB, Government Law College, Ernakulam",
+            "Masters in Property Law"
+        ],
+        experience: "3+ years",
+        expertise: [
+            "Property Law",
+            "Real Estate",
+            "Documentation"
+        ],
+        languages: ["English", "Malayalam", "Hindi"],
+        email: "priya@sladvocates.in",
+        phone: "+91 98765 43213",
+        bio: "Adv. Priya specializes in property law and real estate matters. Her attention to detail in documentation and property verification has helped clients make secure property transactions."
+    },
+    {
+        name: "Adv. Sreejith S",
+        role: "Associate",
+        image: "/images/WFV_1162.JPG",
         education: [
             "LLB, Government Law College, Ernakulam",
             "Masters in Property Law"
