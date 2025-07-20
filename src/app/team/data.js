@@ -21,7 +21,7 @@ export const team = [
     {
         name: "Adv. Sudakshina Prasad",
         role: "Senior Partner",
-        image: "/images/lak.jpg",
+        image: "/images/sud.JPG",
         education: [
             "LLB, Kerala Law Academy",
             "Masters in Family Law"
