@@ -114,7 +114,7 @@ export default function BlogPage() {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center max-w-3xl mx-auto mb-12"
                     >
-                        <h1 className="heading-1 mb-6">
+                        <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight text-primary mb-4">
                             Legal Insights & Updates
                         </h1>
                         <p className="text-text-light text-lg">
@@ -137,7 +137,7 @@ export default function BlogPage() {
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
                                     className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors ${activeCategory === category
-                                            ? 'bg-primary text-white'
+                                            ? 'bg-black text-white'
                                             : 'bg-primary/5 text-primary hover:bg-primary/10'
                                         }`}
                                 >

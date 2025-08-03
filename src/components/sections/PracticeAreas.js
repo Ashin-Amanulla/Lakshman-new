@@ -182,28 +182,14 @@ export default function PracticeAreas() {
               <div className="card-hover h-full">
                 <div className="card-body space-y-6">
                   {/* Header */}
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-center gap-4">
                     <div
-                      className={`w-12 h-12 rounded-2xl bg-gradient-to-r ${area.color} flex items-center justify-center flex-shrink-0`}
+                      className={`w-12 h-12 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0`}
                     >
                       <area.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="heading-h4 mb-2">{area.title}</h3>
-                      <div className="flex gap-4 text-sm">
-                        <span className="text-neutral-600">
-                          <span className="font-semibold text-primary-600">
-                            {area.stats.cases}
-                          </span>{" "}
-                          Cases
-                        </span>
-                        <span className="text-neutral-600">
-                          <span className="font-semibold text-primary-600">
-                            {area.stats.success}
-                          </span>{" "}
-                          Success
-                        </span>
-                      </div>
+                      <h3 className="heading-h4">{area.title}</h3>
                     </div>
                   </div>
 

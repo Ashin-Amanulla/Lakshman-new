@@ -143,7 +143,7 @@ export default function PracticeAreasPage() {
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
                                     className={`px-6 py-2.5 rounded-full transition-all duration-300 text-sm tracking-wide ${activeCategory === category
-                                            ? 'bg-primary text-white shadow-md scale-105 font-medium'
+                                            ? 'bg-black text-white shadow-md scale-105 font-medium'
                                             : 'bg-white text-text hover:bg-primary/5 hover:scale-105 font-normal'
                                         } border border-primary/10`}
                                 >

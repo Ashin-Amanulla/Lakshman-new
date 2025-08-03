@@ -53,13 +53,13 @@ const quickActions = [
     link: "/consultation",
     color: "from-primary-500 to-primary-600",
   },
-  {
-    title: "Book Appointment",
-    description: "Schedule a meeting with one of our experienced attorneys",
-    icon: CalendarDaysIcon,
-    link: "/contact",
-    color: "from-secondary-500 to-secondary-600",
-  },
+  // {
+  //   title: "Book Appointment",
+  //   description: "Schedule a meeting with one of our experienced attorneys",
+  //   icon: CalendarDaysIcon,
+  //   link: "/contact",
+  //   color: "from-secondary-500 to-secondary-600",
+  // },
 ];
 
 export default function Contact() {
@@ -73,103 +73,8 @@ export default function Contact() {
     >
       <div className="container">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-4">
-            Get In Touch
-          </span>
-          <h2 className="heading-h2 mb-6">Ready to Get Started?</h2>
-          <p className="text-lead max-w-3xl mx-auto">
-            Contact us today for expert legal consultation. Our experienced team
-            is here to help you navigate your legal challenges with confidence.
-          </p>
-        </motion.div>
+     
 
-        {/* Quick Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="grid md:grid-cols-2 gap-6 mb-16"
-        >
-          {quickActions.map((action, index) => (
-            <motion.div
-              key={action.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
-            >
-              <Link href={action.link} className="block group">
-                <div
-                  className={`bg-gradient-to-r ${action.color} rounded-3xl p-8 text-white transform group-hover:scale-105 transition-all duration-300 shadow-large group-hover:shadow-xl`}
-                >
-                  <div className="flex items-start gap-6">
-                    <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                      <action.icon className="w-6 h-6" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold mb-2">
-                        {action.title}
-                      </h3>
-                      <p className="text-white/90 mb-4">{action.description}</p>
-                      <div className="inline-flex items-center gap-2 text-white/90 group-hover:text-white transition-colors group/cta">
-                        <span className="font-medium">Get Started</span>
-                        <ArrowRightIcon className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform duration-200" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Contact Information Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {contactInfo.map((info, index) => (
-            <motion.div
-              key={info.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 + index * 0.1, duration: 0.8 }}
-              className="text-center group"
-            >
-              <div className="card-hover">
-                <div className="card-body space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center mx-auto group-hover:bg-primary-500 transition-colors duration-300">
-                    <info.icon className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-neutral-900 mb-2">
-                      {info.title}
-                    </h3>
-                    {info.link ? (
-                      <Link
-                        href={info.link}
-                        className="text-primary-600 hover:text-primary-700 font-medium transition-colors block mb-1"
-                      >
-                        {info.content}
-                      </Link>
-                    ) : (
-                      <p className="text-neutral-700 font-medium mb-1">
-                        {info.content}
-                      </p>
-                    )}
-                    {info.description && (
-                      <p className="text-small text-neutral-600">
-                        {info.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
 
         {/* CTA Section */}
         <motion.div

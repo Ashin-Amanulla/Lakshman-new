@@ -6,6 +6,7 @@ import About from "@/components/sections/About";
 import PracticeAreas from "@/components/sections/PracticeAreas";
 import Contact from "@/components/sections/Contact";
 import { motion } from "framer-motion";
+import Hero2 from "@/components/sections/Hero2";
 
 export default function HomePage() {
   return (

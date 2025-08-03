@@ -1,65 +1,41 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, ScaleIcon, BuildingOfficeIcon, UserGroupIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
-const serviceHighlights = [
+const legalFacts = [
   {
-    id: 1,
-    title: "Civil Litigation",
-    description:
-      "Expert representation in civil matters and complex disputes with proven track record",
-    icon: "/icons/gavel.svg",
-    features: [
-      "Property Disputes",
-      "Commercial Litigation",
-      "Contract Disputes",
-    ],
-    link: "/practice-areas/civil-litigation",
+    title: "Constitutional Excellence",
+    description: "Defending rights with constitutional precision and legal expertise",
+    icon: ScaleIcon,
+    stat: "1000+ Cases Won"
   },
   {
-    id: 2,
-    title: "Corporate Law",
-    description:
-      "Comprehensive legal solutions for businesses from startups to enterprises",
-    icon: "/icons/briefcase.svg",
-    features: ["Business Formation", "Compliance", "Mergers & Acquisitions"],
-    link: "/practice-areas/corporate-law",
+    title: "Corporate Solutions",
+    description: "Comprehensive business law services for enterprises of all sizes",
+    icon: BuildingOfficeIcon,
+    stat: "98% Success Rate"
   },
   {
-    id: 3,
-    title: "Family Law",
-    description:
-      "Sensitive handling of family legal matters with focus on amicable resolution",
-    icon: "/icons/family-shield.svg",
-    features: ["Divorce Proceedings", "Child Custody", "Property Settlement"],
-    link: "/practice-areas/family-law",
-  },
-  {
-    id: 4,
-    title: "Property Law",
-    description:
-      "Expert guidance in property transactions and real estate legal matters",
-    icon: "/icons/property-deed.svg",
-    features: [
-      "Property Documentation",
-      "Title Verification",
-      "Real Estate Disputes",
-    ],
-    link: "/practice-areas/property-law",
-  },
+    title: "Family Protection",
+    description: "Compassionate legal support for family matters and personal disputes",
+    icon: UserGroupIcon,
+    stat: "25+ Years Experience"
+  }
 ];
 
 export default function Hero() {
   const [currentHighlight, setCurrentHighlight] = useState(0);
+  const [currentFact, setCurrentFact] = useState(0);
 
   // Auto-rotate service highlights
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentHighlight((prev) => (prev + 1) % serviceHighlights.length);
+      setCurrentFact((prev) => (prev + 1) % legalFacts.length);
     }, 4000);
 
     return () => clearInterval(timer);
@@ -308,82 +284,60 @@ export default function Hero() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="relative w-full"
           >
-            <div className="relative w-full max-w-lg mx-auto pb-16">
+            <div className="relative">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={currentHighlight}
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -30, scale: 0.95 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className="w-full"
+                  key={currentFact}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20"
                 >
-                  <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-large p-6 sm:p-8 flex flex-col min-h-[420px] sm:min-h-[450px]">
-                    {/* Service Icon */}
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-primary-50 flex items-center justify-center mb-4 sm:mb-6 mx-auto flex-shrink-0">
-                      <Image
-                        src={serviceHighlights[currentHighlight].icon}
-                        alt=""
-                        width={32}
-                        height={32}
-                        className="w-7 h-7 sm:w-8 sm:h-8"
-                      />
-                    </div>
+                  {/* Icon */}
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg"
+                  >
+                    {React.createElement(legalFacts[currentFact].icon, { className: "w-10 h-10 text-white" })}
+                  </motion.div>
 
-                    {/* Service Content */}
-                    <div className="text-center space-y-3 sm:space-y-4 flex-1 flex flex-col justify-between">
-                      <div className="space-y-3 sm:space-y-4">
-                        <h3 className="text-xl sm:text-2xl font-bold text-primary-600 leading-tight">
-                          {serviceHighlights[currentHighlight].title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-neutral-700 leading-relaxed px-2">
-                          {serviceHighlights[currentHighlight].description}
-                        </p>
-                      </div>
+                  {/* Content */}
+                  <div className="text-center space-y-4">
+                    <h3 className="text-2xl font-bold text-slate-800 leading-tight">
+                      {legalFacts[currentFact].title}
+                    </h3>
 
-                      {/* Features List */}
-                      <div className="py-2 sm:py-4">
-                        <ul className="space-y-2 text-sm text-neutral-600">
-                          {serviceHighlights[currentHighlight].features.map(
-                            (feature, index) => (
-                              <li
-                                key={index}
-                                className="flex items-center justify-center gap-2"
-                              >
-                                <span className="w-1.5 h-1.5 bg-primary-400 rounded-full flex-shrink-0" />
-                                <span className="text-center">{feature}</span>
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </div>
+                    <p className="text-slate-600 leading-relaxed px-2">
+                      {legalFacts[currentFact].description}
+                    </p>
 
-                      {/* CTA */}
-                      <div className="pt-2">
-                        <Link
-                          href={serviceHighlights[currentHighlight].link}
-                          className="inline-flex items-center justify-center gap-2 text-primary-600 hover:text-primary-700 font-medium transition-colors group text-sm sm:text-base"
-                        >
-                          Learn More
-                          <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                        </Link>
-                      </div>
-                    </div>
+                    {/* Stat Badge */}
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="inline-flex items-center gap-2 bg-gradient-to-r from-slate-100 to-slate-200 px-6 py-3 rounded-full"
+                    >
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                      <span className="font-semibold text-slate-700">
+                        {legalFacts[currentFact].stat}
+                      </span>
+                    </motion.div>
                   </div>
                 </motion.div>
               </AnimatePresence>
 
               {/* Navigation Dots */}
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
-                {serviceHighlights.map((_, index) => (
-                  <button
+              <div className="flex justify-center gap-3 mt-8">
+                {legalFacts.map((_, index) => (
+                  <motion.button
                     key={index}
-                    onClick={() => setCurrentHighlight(index)}
-                    className={`h-3 rounded-full transition-all duration-300 ${currentHighlight === index
-                      ? "bg-white w-8"
-                      : "bg-white/30 hover:bg-white/50 w-3"
+                    onClick={() => setCurrentFact(index)}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${currentFact === index
+                      ? "bg-blue-400 shadow-lg shadow-blue-400/50"
+                      : "bg-white/30 hover:bg-white/50"
                       }`}
-                    aria-label={`Go to service ${index + 1}`}
                   />
                 ))}
               </div>

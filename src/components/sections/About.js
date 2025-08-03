@@ -234,44 +234,14 @@ export default function About() {
                 src="/images/asokha.webp"
                 alt="SL Advocates Office"
                 width={600}
-                height={400}
-                className="w-full h-80 object-cover"
+                height={1000}
+                className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/20 to-transparent" />
             </div>
 
             {/* Achievements Timeline */}
-            <div className="space-y-6">
-              <h3 className="heading-h4">Recent Achievements</h3>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <motion.div
-                    key={achievement.year}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
-                    className="flex gap-4 p-4 bg-white rounded-xl border border-neutral-200 hover:border-primary-200 hover:shadow-soft transition-all duration-300"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-accent-100 flex items-center justify-center flex-shrink-0">
-                      <AcademicCapIcon className="w-6 h-6 text-accent-600" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-semibold text-neutral-900">
-                          {achievement.title}
-                        </h4>
-                        <span className="text-xs px-2 py-1 bg-primary-100 text-primary-700 rounded-full">
-                          {achievement.year}
-                        </span>
-                      </div>
-                      <p className="text-small text-neutral-600">
-                        {achievement.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+           
           </motion.div>
         </div>
       </div>
