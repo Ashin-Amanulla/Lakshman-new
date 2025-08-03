@@ -214,7 +214,7 @@ export default function Footer() {
                   Get expert legal consultation today.
                 </p>
                 <Link
-                  href="/consultation"
+                  href="/contact"
                   className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
                 >
                   Free Consultation

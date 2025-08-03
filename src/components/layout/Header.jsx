@@ -4,20 +4,24 @@ import { useState, useEffect } from "react";
 import Logo from "@/components/common/Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Practice Areas", href: "/practice-areas" },
   { name: "Our Team", href: "/team" },
   { name: "Blog", href: "/blog" },
-  // { name: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
+  // Function to close mobile menu
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
 
   // Handle scroll effect
   useEffect(() => {
@@ -51,12 +55,12 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "backdrop-blur-glass shadow-medium border-b border-neutral-200/20"
-          : "bg-white/95 backdrop-blur-sm"
+          ? "bg-white shadow-lg border-b border-neutral-100"
+          : "bg-white"
       }`}
     >
-      <div className="container">
-        <div className="flex items-center justify-between h-20">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div className="flex items-center">
             <Logo />
@@ -64,36 +68,46 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden lg:flex items-center gap-8"
+            className="hidden lg:flex items-center space-x-8"
             aria-label="Main navigation"
           >
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`relative text-sm font-medium transition-colors duration-200 hover:text-primary-600 focus-visible:text-primary-600 ${
+                className={`relative px-3 py-2 text-sm font-semibold transition-all duration-200 rounded-lg group ${
                   pathname === item.href
-                    ? "text-primary-600"
-                    : "text-neutral-700"
-                } after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-primary-500 after:transition-all after:duration-200 ${
-                  pathname === item.href
-                    ? "after:w-full"
-                    : "after:w-0 hover:after:w-full"
+                    ? "text-primary-600 bg-primary-50"
+                    : "text-neutral-700 hover:text-primary-600 hover:bg-neutral-50"
                 }`}
                 aria-current={pathname === item.href ? "page" : undefined}
               >
                 {item.name}
+                <span
+                  className={`absolute bottom-0 left-1/2 h-0.5 bg-primary-600 transition-all duration-200 ${
+                    pathname === item.href
+                      ? "w-6 -translate-x-1/2"
+                      : "w-0 group-hover:w-6 -translate-x-1/2"
+                  }`}
+                />
               </Link>
             ))}
-            <Link href="/contact" className="btn-primary btn-sm ml-4">
-              Get Consultation
-            </Link>
+
+            {/* CTA Button */}
+            <div className="ml-8 pl-8 border-l border-neutral-200">
+              <Link
+                href="/contact"
+                className="inline-flex items-center px-6 py-2.5 text-sm font-semibold text-white bg-primary-600 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md"
+              >
+                Get Consultation
+              </Link>
+            </div>
           </nav>
 
           {/* Mobile menu button */}
           <button
             type="button"
-            className="lg:hidden relative z-50 p-2 rounded-xl text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+            className="lg:hidden relative z-50 flex flex-col items-center justify-center w-10 h-10 rounded-lg bg-neutral-100 hover:bg-primary-50 transition-colors duration-200 group"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
@@ -102,20 +116,20 @@ export default function Header() {
             <span className="sr-only">
               {mobileMenuOpen ? "Close main menu" : "Open main menu"}
             </span>
-            <div className="relative w-6 h-6">
+            <div className="flex flex-col items-center justify-center w-5 h-5">
               <span
-                className={`absolute block w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                  mobileMenuOpen ? "rotate-45 top-3" : "top-1"
+                className={`block w-5 h-0.5 bg-neutral-700 group-hover:bg-primary-600 transform transition-all duration-300 ${
+                  mobileMenuOpen ? "rotate-45 translate-y-1" : "-translate-y-1"
                 }`}
               />
               <span
-                className={`absolute block w-6 h-0.5 bg-current transform transition-all duration-300 top-3 ${
+                className={`block w-5 h-0.5 bg-neutral-700 group-hover:bg-primary-600 transform transition-all duration-300 ${
                   mobileMenuOpen ? "opacity-0" : "opacity-100"
                 }`}
               />
               <span
-                className={`absolute block w-6 h-0.5 bg-current transform transition-all duration-300 ${
-                  mobileMenuOpen ? "-rotate-45 top-3" : "top-5"
+                className={`block w-5 h-0.5 bg-neutral-700 group-hover:bg-primary-600 transform transition-all duration-300 ${
+                  mobileMenuOpen ? "-rotate-45 -translate-y-1" : "translate-y-1"
                 }`}
               />
             </div>
@@ -123,21 +137,19 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu overlay */}
-      <div
-        className={`lg:hidden fixed inset-0 z-40 transition-opacity duration-300 ${
-          mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden="true"
-      >
-        <div className="absolute inset-0 bg-neutral-900/50 backdrop-blur-sm" />
-      </div>
+      {/* Mobile menu backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-[9999] bg-black/60"
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Mobile menu */}
       <div
         id="mobile-menu"
-        className={`lg:hidden fixed top-0 right-0 z-40 w-full max-w-sm h-full bg-white shadow-large transform transition-transform duration-300 ${
+        className={`lg:hidden fixed top-0 right-0 z-[10000] w-80 h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -146,53 +158,63 @@ export default function Header() {
       >
         <div className="flex flex-col h-full">
           {/* Mobile menu header */}
-          <div className="flex items-center justify-between p-6 border-b border-neutral-200">
-            <h2
-              id="mobile-menu-title"
-              className="text-lg font-semibold text-neutral-900"
+          <div className="flex items-center justify-between p-6 border-b border-neutral-100 bg-primary-600">
+            <div className="flex items-center">
+              <span className="text-white font-bold text-lg">Menu</span>
+            </div>
+            <button
+              type="button"
+              className="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-all duration-200"
+              onClick={closeMobileMenu}
+              aria-label="Close menu"
             >
-              Menu
-            </h2>
+              <XMarkIcon className="w-6 h-6" />
+            </button>
           </div>
 
           {/* Mobile navigation */}
-          <nav
-            className="flex-1 px-6 py-6 space-y-2"
-            aria-label="Mobile navigation"
-          >
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`block px-4 py-3 text-base font-medium rounded-xl transition-colors duration-200 ${
-                  pathname === item.href
-                    ? "bg-primary-50 text-primary-600"
-                    : "text-neutral-700 hover:bg-neutral-50 hover:text-primary-600"
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-                aria-current={pathname === item.href ? "page" : undefined}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <nav className="flex-1 p-6" aria-label="Mobile navigation">
+            <div className="space-y-2">
+              {navigation.map((item, index) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                    pathname === item.href
+                      ? "text-primary-600 bg-primary-50 border-l-4 border-primary-600"
+                      : "text-neutral-700 hover:text-primary-600 hover:bg-neutral-50"
+                  }`}
+                  onClick={closeMobileMenu}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  style={{
+                    animationDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
+                  }}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </nav>
 
           {/* Mobile menu footer */}
-          <div className="p-6 border-t border-neutral-200">
-            <Link
-              href="/consultation"
-              className="btn-primary w-full text-center"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Get Consultation
-            </Link>
-            <div className="mt-4 text-center">
+          <div className="p-6 border-t border-neutral-100 bg-neutral-50">
+            <div className="space-y-4">
               <Link
-                href="tel:+919876543210"
-                className="text-sm text-neutral-600 hover:text-primary-600 transition-colors"
+                href="/contact"
+                className="block w-full py-3 px-4 text-center text-base font-semibold text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-all duration-200 shadow-sm"
+                onClick={closeMobileMenu}
               >
-                Call: +91 98765 43210
+                Get Consultation
               </Link>
+              <div className="text-center">
+                <Link
+                  href="tel:+919876543210"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors"
+                >
+                  <span className="text-base">📞</span>
+                  +91 98765 43210
+                </Link>
+              </div>
             </div>
           </div>
         </div>

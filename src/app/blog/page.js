@@ -137,7 +137,7 @@ export default function BlogPage() {
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
                                     className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors ${activeCategory === category
-                                            ? 'bg-black text-white'
+                                            ? 'bg-primary-500 text-white'
                                             : 'bg-primary/5 text-primary hover:bg-primary/10'
                                         }`}
                                 >

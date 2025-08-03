@@ -57,14 +57,14 @@ const contactMethods = [
     icon: EnvelopeIcon,
     href: `mailto:${contactInfo.email}`,
     value: contactInfo.email,
-    color: "bg-secondary-500",
+    color: "bg-primary-500",
   },
   {
     name: "WhatsApp",
     icon: FaWhatsapp,
     href: `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}`,
     value: contactInfo.whatsapp,
-    color: "bg-green-500",
+    color: "bg-primary-500",
     isExternal: true,
   },
 ];

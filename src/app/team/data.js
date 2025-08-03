@@ -38,6 +38,25 @@ export const team = [
         bio: "Adv. Sarah specializes in family law matters, bringing a compassionate yet strategic approach to sensitive cases. Her expertise in mediation has helped numerous families reach amicable resolutions."
     },
     {
+        name: "Adv. Sreejith S",
+        role: "Associate",
+        image: "/images/WFV_1162.JPG",
+        education: [
+            "LLB, Government Law College, Ernakulam",
+            "Masters in Property Law"
+        ],
+        experience: "3+ years",
+        expertise: [
+            "Property Law",
+            "Real Estate",
+            "Documentation"
+        ],
+        languages: ["English", "Malayalam", "Hindi"],
+        email: "priya@sladvocates.in",
+        phone: "+91 98765 43213",
+        bio: "Adv. Priya specializes in property law and real estate matters. Her attention to detail in documentation and property verification has helped clients make secure property transactions."
+    },
+    {
         name: "Adv. Rahul Menon",
         role: "Partner",
         image: "/images/WFV_1155.JPG",
@@ -75,23 +94,5 @@ export const team = [
         phone: "+91 98765 43213",
         bio: "Adv. Priya specializes in property law and real estate matters. Her attention to detail in documentation and property verification has helped clients make secure property transactions."
     },
-    {
-        name: "Adv. Sreejith S",
-        role: "Associate",
-        image: "/images/WFV_1162.JPG",
-        education: [
-            "LLB, Government Law College, Ernakulam",
-            "Masters in Property Law"
-        ],
-        experience: "3+ years",
-        expertise: [
-            "Property Law",
-            "Real Estate",
-            "Documentation"
-        ],
-        languages: ["English", "Malayalam", "Hindi"],
-        email: "priya@sladvocates.in",
-        phone: "+91 98765 43213",
-        bio: "Adv. Priya specializes in property law and real estate matters. Her attention to detail in documentation and property verification has helped clients make secure property transactions."
-    }
+   
 ] 

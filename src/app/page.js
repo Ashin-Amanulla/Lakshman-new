@@ -5,23 +5,29 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import PracticeAreas from "@/components/sections/PracticeAreas";
 import Contact from "@/components/sections/Contact";
+import DisclaimerModal from "@/components/common/DisclaimerModal";
 import { motion } from "framer-motion";
 import Hero2 from "@/components/sections/Hero2";
 
 export default function HomePage() {
   return (
-    <PageWrapper>
-      {/* Hero Section */}
-      <Hero />
+    <>
+      <PageWrapper>
+        {/* Hero Section */}
+        <Hero />
 
-      {/* About & Stats Section */}
-      <About />
+        {/* About & Stats Section */}
+        <About />
 
-      {/* Practice Areas Section */}
-      <PracticeAreas />
+        {/* Practice Areas Section */}
+        <PracticeAreas />
 
-      {/* Contact Section */}
-      <Contact />
-    </PageWrapper>
+        {/* Contact Section */}
+        <Contact />
+      </PageWrapper>
+
+      {/* Disclaimer Modal */}
+      <DisclaimerModal />
+    </>
   );
 }
