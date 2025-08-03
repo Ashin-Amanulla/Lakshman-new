@@ -318,8 +318,8 @@ export default function Hero2() {
                                                 whileHover={{ scale: 1.2 }}
                                                 whileTap={{ scale: 0.9 }}
                                                 className={`w-3 h-3 rounded-full transition-all duration-300 ${currentFact === index
-                                                        ? "bg-amber-400 shadow-lg shadow-amber-400/50"
-                                                        : "bg-white/30 hover:bg-white/50"
+                                                    ? "bg-amber-400 shadow-lg shadow-amber-400/50"
+                                                    : "bg-white/30 hover:bg-white/50"
                                                     }`}
                                             />
                                         ))}
