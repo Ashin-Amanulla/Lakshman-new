@@ -50,7 +50,7 @@ const quickActions = [
     description:
       "Schedule a no-obligation consultation to discuss your legal needs",
     icon: ChatBubbleLeftRightIcon,
-    link: "/consultation",
+    link: "/contact",
     color: "from-primary-500 to-primary-600",
   },
   // {

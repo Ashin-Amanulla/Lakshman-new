@@ -231,7 +231,7 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row items-center gap-4 text-white/60 text-sm">
               <p>© {currentYear} SL Advocates. All rights reserved.</p>
               <div className="hidden sm:block w-1 h-1 bg-white/40 rounded-full"></div>
-              <p>Licensed to practice law in Kerala, India</p>
+              <p><Link href="https://www.xyvin.com" className="hover:text-white transition-colors duration-200"> Developed by Xyvin</Link></p>
             </div>
 
             <div className="flex flex-wrap gap-6 text-sm text-white/60">
@@ -247,18 +247,8 @@ export default function Footer() {
               >
                 Terms of Service
               </Link>
-              <Link
-                href="/disclaimer"
-                className="hover:text-white transition-colors duration-200"
-              >
-                Legal Disclaimer
-              </Link>
-              <Link
-                href="/sitemap"
-                className="hover:text-white transition-colors duration-200"
-              >
-                Sitemap
-              </Link>
+             
+            
             </div>
           </div>
         </div>
