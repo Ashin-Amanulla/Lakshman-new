@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRightIcon, ScaleIcon, BuildingOfficeIcon, UserGroupIcon } from "@heroicons/react/24/outline";
+import IndiaClientMap from "./IndiaClientMap";
 
 const legalFacts = [
   {
@@ -33,37 +34,6 @@ const stats = [
   { number: "24/7", label: "Availability" },
 ];
 
-const S = {
-  section: {
-    position: "relative",
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FAFAF8",
-    overflow: "hidden",
-  },
-  ambientGlow: {
-    position: "absolute",
-    top: "10%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: "700px",
-    height: "500px",
-    background: "radial-gradient(ellipse, rgba(184,134,11,0.04) 0%, transparent 70%)",
-    pointerEvents: "none",
-  },
-  inner: {
-    position: "relative",
-    zIndex: 10,
-    width: "100%",
-    maxWidth: "64rem",
-    margin: "0 auto",
-    padding: "8rem 1.5rem 6rem",
-    textAlign: "center",
-  },
-};
-
 export default function Hero() {
   const [currentFact, setCurrentFact] = useState(0);
 
@@ -75,11 +45,32 @@ export default function Hero() {
   }, []);
 
   return (
-    <section style={S.section}>
+    <section
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#FAFAF8",
+        overflow: "hidden",
+      }}
+    >
       {/* Ambient glow */}
-      <div style={S.ambientGlow} />
+      <div
+        style={{
+          position: "absolute",
+          top: "10%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "700px",
+          height: "500px",
+          background: "radial-gradient(ellipse, rgba(184,134,11,0.04) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
-      {/* Subtle paper grain overlay */}
+      {/* Paper grain overlay */}
       <div
         style={{
           position: "absolute",
@@ -91,9 +82,17 @@ export default function Hero() {
         }}
       />
 
-      <div style={S.inner}>
-
-        {/* Section Label */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 10,
+          width: "100%",
+          maxWidth: "72rem",
+          margin: "0 auto",
+          padding: "8rem 1.5rem 6rem",
+        }}
+      >
+        {/* Section Label — centered, full width */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,159 +122,163 @@ export default function Hero() {
           <span style={{ flex: 1, maxWidth: "80px", height: "1px", backgroundColor: "#E8E4DF" }} />
         </motion.div>
 
-        {/* Main Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.8, ease: "easeOut" }}
-          style={{
-            fontFamily: '"Playfair Display", Georgia, serif',
-            fontSize: "clamp(2.75rem, 7vw, 5rem)",
-            fontWeight: 400,
-            lineHeight: 1.08,
-            letterSpacing: "-0.02em",
-            color: "#1A1A1A",
-            margin: "0 auto 1.5rem",
-            maxWidth: "52rem",
-          }}
-        >
-          Legal Excellence
-          <br />
-          <em style={{ fontStyle: "italic", color: "#B8860B" }}>with Integrity</em>
-        </motion.h1>
+        {/* Two-column grid: text left, map right */}
+        <div className="flex flex-col lg:flex-row lg:gap-14 lg:items-center" style={{ marginBottom: "4rem" }}>
 
-        {/* Decorative rule under headline */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-          style={{
-            height: "1px",
-            width: "64px",
-            backgroundColor: "#B8860B",
-            margin: "0 auto 2rem",
-            opacity: 0.5,
-          }}
-        />
+          {/* Left column — headline + subheading + CTAs */}
+          <div className="flex-1 min-w-0 text-center lg:text-left">
 
-        {/* Subheading */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-          style={{
-            fontFamily: '"Source Sans 3", system-ui, sans-serif',
-            fontSize: "clamp(1rem, 2.5vw, 1.2rem)",
-            fontWeight: 400,
-            lineHeight: 1.75,
-            color: "#6B6B6B",
-            maxWidth: "42rem",
-            margin: "0 auto 3rem",
-            letterSpacing: "0.01em",
-          }}
-        >
-          Premier law firm in Kerala providing comprehensive legal solutions with
-          unwavering dedication and expertise. Your trusted legal partner since 2020.
-        </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.8, ease: "easeOut" }}
+              className="mx-auto lg:mx-0"
+              style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: "clamp(2.75rem, 7vw, 5rem)",
+                fontWeight: 400,
+                lineHeight: 1.08,
+                letterSpacing: "-0.02em",
+                color: "#1A1A1A",
+                marginBottom: "1.5rem",
+                maxWidth: "32rem",
+              }}
+            >
+              Legal Excellence
+              <br />
+              <em style={{ fontStyle: "italic", color: "#B8860B" }}>with Integrity</em>
+            </motion.h1>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.8, ease: "easeOut" }}
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "1rem",
-            justifyContent: "center",
-            marginBottom: "5rem",
-          }}
-        >
-          <Link
-            href="/consultation"
-            style={{
-              fontFamily: '"Source Sans 3", system-ui, sans-serif',
-              fontSize: "0.8rem",
-              fontWeight: 500,
-              letterSpacing: "0.07em",
-              textTransform: "uppercase",
-              color: "#FFFFFF",
-              backgroundColor: "#B8860B",
-              padding: "0.875rem 2.25rem",
-              borderRadius: "6px",
-              textDecoration: "none",
-              border: "1px solid #B8860B",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              minHeight: "48px",
-              transition: "all 200ms ease-out",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#D4A84B";
-              e.currentTarget.style.borderColor = "#D4A84B";
-              e.currentTarget.style.transform = "translateY(-1px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#B8860B";
-              e.currentTarget.style.borderColor = "#B8860B";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
+            {/* Decorative rule */}
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+              className="mx-auto lg:mx-0"
+              style={{
+                height: "1px",
+                width: "64px",
+                backgroundColor: "#B8860B",
+                marginBottom: "2rem",
+                opacity: 0.5,
+              }}
+            />
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+              className="mx-auto lg:mx-0"
+              style={{
+                fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                fontSize: "clamp(1rem, 2.5vw, 1.15rem)",
+                fontWeight: 400,
+                lineHeight: 1.75,
+                color: "#6B6B6B",
+                maxWidth: "36rem",
+                marginBottom: "2.5rem",
+                letterSpacing: "0.01em",
+              }}
+            >
+              Premier law firm in Kerala providing comprehensive legal solutions with
+              unwavering dedication and expertise. Your trusted legal partner since 2020.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.8, ease: "easeOut" }}
+              className="flex flex-wrap gap-4 justify-center lg:justify-start"
+            >
+              <Link
+                href="/consultation"
+                style={{
+                  fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                  fontSize: "0.8rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.07em",
+                  textTransform: "uppercase",
+                  color: "#FFFFFF",
+                  backgroundColor: "#B8860B",
+                  padding: "0.875rem 2.25rem",
+                  borderRadius: "6px",
+                  textDecoration: "none",
+                  border: "1px solid #B8860B",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  minHeight: "48px",
+                  transition: "all 200ms ease-out",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#D4A84B";
+                  e.currentTarget.style.borderColor = "#D4A84B";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#B8860B";
+                  e.currentTarget.style.borderColor = "#B8860B";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                Get Free Consultation
+                <ArrowRightIcon style={{ width: "16px", height: "16px" }} />
+              </Link>
+              <Link
+                href="/practice-areas"
+                style={{
+                  fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                  fontSize: "0.8rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.07em",
+                  textTransform: "uppercase",
+                  color: "#1A1A1A",
+                  backgroundColor: "transparent",
+                  padding: "0.875rem 2.25rem",
+                  borderRadius: "6px",
+                  textDecoration: "none",
+                  border: "1px solid #1A1A1A",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  minHeight: "48px",
+                  transition: "all 200ms ease-out",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#F5F3F0";
+                  e.currentTarget.style.color = "#B8860B";
+                  e.currentTarget.style.borderColor = "#B8860B";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.color = "#1A1A1A";
+                  e.currentTarget.style.borderColor = "#1A1A1A";
+                }}
+              >
+                Our Practice Areas
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right column — India map (desktop only) */}
+          <div
+            className="hidden lg:block"
+            style={{ width: "320px", flexShrink: 0 }}
           >
-            Get Free Consultation
-            <ArrowRightIcon style={{ width: "16px", height: "16px" }} />
-          </Link>
-          <Link
-            href="/practice-areas"
-            style={{
-              fontFamily: '"Source Sans 3", system-ui, sans-serif',
-              fontSize: "0.8rem",
-              fontWeight: 500,
-              letterSpacing: "0.07em",
-              textTransform: "uppercase",
-              color: "#1A1A1A",
-              backgroundColor: "transparent",
-              padding: "0.875rem 2.25rem",
-              borderRadius: "6px",
-              textDecoration: "none",
-              border: "1px solid #1A1A1A",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              minHeight: "48px",
-              transition: "all 200ms ease-out",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#F5F3F0";
-              e.currentTarget.style.color = "#B8860B";
-              e.currentTarget.style.borderColor = "#B8860B";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "transparent";
-              e.currentTarget.style.color = "#1A1A1A";
-              e.currentTarget.style.borderColor = "#1A1A1A";
-            }}
-          >
-            Our Practice Areas
-          </Link>
-        </motion.div>
+            <IndiaClientMap />
+          </div>
+        </div>
 
-        {/* Stats Bar */}
+        {/* Stats Bar — full width */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-          style={{
-            borderTop: "1px solid #E8E4DF",
-            paddingTop: "2.5rem",
-          }}
+          style={{ borderTop: "1px solid #E8E4DF", paddingTop: "2.5rem" }}
         >
           <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "0",
-            }}
+            style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0" }}
             className="grid-cols-2 sm:grid-cols-4"
           >
             {stats.map((stat, i) => (
@@ -286,7 +289,6 @@ export default function Hero() {
                   padding: "0 1.5rem",
                   borderRight: i < stats.length - 1 ? "1px solid #E8E4DF" : "none",
                 }}
-                className={i % 2 !== 1 && i !== stats.length - 1 ? "" : ""}
               >
                 <div
                   style={{
@@ -323,7 +325,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
-          style={{ marginTop: "3rem" }}
+          style={{ marginTop: "3rem", textAlign: "center" }}
         >
           <AnimatePresence mode="wait">
             <motion.div
