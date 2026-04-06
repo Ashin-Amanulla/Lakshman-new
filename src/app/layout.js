@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/common/BackToTop";
 import WhatsAppButton from "@/components/common/WhatsAppButton";
+import DisclaimerModal from "@/components/common/DisclaimerModal";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -198,6 +199,7 @@ export default function RootLayout({ children }) {
           <Footer />
           <BackToTop />
           <WhatsAppButton />
+          <DisclaimerModal />
         </div>
       </body>
     </html>
