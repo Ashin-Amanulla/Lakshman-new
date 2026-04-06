@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ScaleIcon,
   UserGroupIcon,
@@ -12,9 +11,7 @@ import {
   HomeIcon,
   BanknotesIcon,
   ShieldCheckIcon,
-  DocumentTextIcon,
   ArrowRightIcon,
-  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 
 const practiceAreas = [
@@ -24,16 +21,8 @@ const practiceAreas = [
     description:
       "Expert representation in civil matters including property disputes, contract violations, and commercial litigation with proven success.",
     icon: ScaleIcon,
-    features: [
-      "Property Disputes",
-      "Contract Violations",
-      "Commercial Litigation",
-      "Tort Claims",
-      "Employment Disputes",
-    ],
-    stats: { cases: "250+", success: "96%" },
-    image: "/images/civil-litigation.jpg",
-    color: "from-blue-500 to-blue-600",
+    features: ["Property Disputes", "Contract Violations", "Commercial Litigation", "Tort Claims", "Employment Disputes"],
+    stats: { cases: "30+", success: "96%" },
   },
   {
     id: "corporate-law",
@@ -41,16 +30,8 @@ const practiceAreas = [
     description:
       "Comprehensive legal solutions for businesses from startups to large enterprises, ensuring compliance and growth.",
     icon: BuildingOfficeIcon,
-    features: [
-      "Business Formation",
-      "Corporate Governance",
-      "Mergers & Acquisitions",
-      "Compliance Management",
-      "Contract Drafting",
-    ],
-    stats: { cases: "180+", success: "99%" },
-    image: "/images/corporate-law.jpg",
-    color: "from-indigo-500 to-indigo-600",
+    features: ["Business Formation", "Corporate Governance", "Mergers & Acquisitions", "Compliance Management", "Contract Drafting"],
+    stats: { cases: "15+", success: "99%" },
   },
   {
     id: "family-law",
@@ -58,16 +39,8 @@ const practiceAreas = [
     description:
       "Sensitive and professional handling of family matters with focus on amicable resolutions and protecting your interests.",
     icon: UserGroupIcon,
-    features: [
-      "Divorce Proceedings",
-      "Child Custody",
-      "Alimony & Support",
-      "Property Settlement",
-      "Adoption Services",
-    ],
-    stats: { cases: "200+", success: "94%" },
-    image: "/images/family-law.jpg",
-    color: "from-purple-500 to-purple-600",
+    features: ["Divorce Proceedings", "Child Custody", "Alimony & Support", "Property Settlement", "Adoption Services"],
+    stats: { cases: "20+", success: "94%" },
   },
   {
     id: "property-law",
@@ -75,16 +48,8 @@ const practiceAreas = [
     description:
       "Expert guidance in property transactions, documentation, and disputes with thorough due diligence.",
     icon: HomeIcon,
-    features: [
-      "Property Documentation",
-      "Title Verification",
-      "Real Estate Transactions",
-      "Property Disputes",
-      "Land Acquisition",
-    ],
-    stats: { cases: "320+", success: "97%" },
-    image: "/images/property-law.jpg",
-    color: "from-green-500 to-green-600",
+    features: ["Property Documentation", "Title Verification", "Real Estate Transactions", "Property Disputes", "Land Acquisition"],
+    stats: { cases: "25+", success: "97%" },
   },
   {
     id: "criminal-law",
@@ -92,16 +57,8 @@ const practiceAreas = [
     description:
       "Aggressive defense representation for criminal charges with thorough case preparation and strategic advocacy.",
     icon: ShieldCheckIcon,
-    features: [
-      "Criminal Defense",
-      "Bail Applications",
-      "White Collar Crimes",
-      "Economic Offenses",
-      "Appeals",
-    ],
-    stats: { cases: "150+", success: "92%" },
-    image: "/images/criminal-law.jpg",
-    color: "from-red-500 to-red-600",
+    features: ["Criminal Defense", "Bail Applications", "White Collar Crimes", "Economic Offenses", "Appeals"],
+    stats: { cases: "15+", success: "92%" },
   },
   {
     id: "banking-finance",
@@ -109,125 +66,332 @@ const practiceAreas = [
     description:
       "Specialized legal services for banking and financial matters including loan recovery and financial disputes.",
     icon: BanknotesIcon,
-    features: [
-      "Loan Recovery",
-      "Financial Disputes",
-      "Banking Regulations",
-      "Debt Recovery",
-      "SARFAESI Matters",
-    ],
-    stats: { cases: "120+", success: "95%" },
-    image: "/images/banking-finance.jpg",
-    color: "from-yellow-500 to-yellow-600",
+    features: ["Loan Recovery", "Financial Disputes", "Banking Regulations", "Debt Recovery", "SARFAESI Matters"],
+    stats: { cases: "10+", success: "95%" },
   },
 ];
 
-const ProcessStep = ({ number, title, description, delay }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+const processSteps = [
+  {
+    number: "I",
+    title: "Consultation",
+    description: "Free initial consultation to understand your legal needs",
+  },
+  {
+    number: "II",
+    title: "Analysis",
+    description: "Thorough case analysis and legal research strategy",
+  },
+  {
+    number: "III",
+    title: "Action",
+    description: "Execute the legal strategy with meticulous detail",
+  },
+  {
+    number: "IV",
+    title: "Resolution",
+    description: "Achieve favorable outcomes while keeping you informed",
+  },
+];
 
+function ProcessStep({ number, title, description, index, isInView }) {
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay, duration: 0.6 }}
-      className="text-center"
+      transition={{ delay: 0.1 + index * 0.12, duration: 0.7 }}
+      style={{ textAlign: "center", position: "relative" }}
     >
-      <div className="w-12 h-12 rounded-full bg-primary-500 text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
-        {number}
+      {/* Roman numeral circle */}
+      <div
+        style={{
+          width: "56px",
+          height: "56px",
+          borderRadius: "50%",
+          border: "1px solid rgba(184,134,11,0.35)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "0 auto 1.25rem",
+          backgroundColor: "rgba(184,134,11,0.06)",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: '"Playfair Display", Georgia, serif',
+            fontSize: "1rem",
+            fontWeight: 500,
+            color: "#B8860B",
+            letterSpacing: "0.05em",
+          }}
+        >
+          {number}
+        </span>
       </div>
-      <h4 className="font-semibold text-neutral-900 mb-2">{title}</h4>
-      <p className="text-small text-neutral-600">{description}</p>
+
+      <h4
+        style={{
+          fontFamily: '"Playfair Display", Georgia, serif',
+          fontSize: "1.1rem",
+          fontWeight: 600,
+          color: "#FAFAF8",
+          marginBottom: "0.5rem",
+        }}
+      >
+        {title}
+      </h4>
+      <p
+        style={{
+          fontFamily: '"Source Sans 3", system-ui, sans-serif',
+          fontSize: "0.875rem",
+          color: "rgba(250, 250, 248, 0.55)",
+          lineHeight: 1.65,
+          maxWidth: "180px",
+          margin: "0 auto",
+        }}
+      >
+        {description}
+      </p>
     </motion.div>
   );
-};
+}
 
 export default function PracticeAreas() {
-  const [activeArea, setActiveArea] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.1 });
 
   return (
-    <section className="section-padding bg-white" ref={ref}>
+    <section
+      style={{ backgroundColor: "#FAFAF8", padding: "6rem 0" }}
+      ref={ref}
+    >
       <div className="container">
-        {/* Section Header */}
+
+        {/* Section Label */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            justifyContent: "center",
+            marginBottom: "1.25rem",
+          }}
         >
-          <span className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-4">
+          <span style={{ flex: 1, maxWidth: "120px", height: "1px", backgroundColor: "#E8E4DF" }} />
+          <span
+            style={{
+              fontFamily: '"IBM Plex Mono", monospace',
+              fontSize: "0.65rem",
+              fontWeight: 500,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "#B8860B",
+              whiteSpace: "nowrap",
+            }}
+          >
             Our Expertise
           </span>
-          <h2 className="heading-h2 mb-6">Comprehensive Legal Services</h2>
-          <p className="text-lead max-w-3xl mx-auto">
+          <span style={{ flex: 1, maxWidth: "120px", height: "1px", backgroundColor: "#E8E4DF" }} />
+        </motion.div>
+
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          style={{ textAlign: "center", marginBottom: "4rem" }}
+        >
+          <h2
+            style={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: "clamp(2rem, 5vw, 3rem)",
+              fontWeight: 400,
+              color: "#1A1A1A",
+              letterSpacing: "-0.01em",
+              lineHeight: 1.2,
+              marginBottom: "1rem",
+            }}
+          >
+            Comprehensive Legal Services
+          </h2>
+          <p
+            style={{
+              fontFamily: '"Source Sans 3", system-ui, sans-serif',
+              fontSize: "1.05rem",
+              color: "#6B6B6B",
+              maxWidth: "38rem",
+              margin: "0 auto",
+              lineHeight: 1.75,
+            }}
+          >
             From complex litigation to routine legal matters, our experienced
             team provides specialized expertise across multiple practice areas
             to serve your legal needs.
           </p>
         </motion.div>
 
-        {/* Practice Areas Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-20">
-          {practiceAreas.map((area, index) => (
+        {/* Cards Grid */}
+        <div
+          style={{
+            display: "grid",
+            gap: "1.5rem",
+            marginBottom: "5rem",
+          }}
+          className="md:grid-cols-2 lg:grid-cols-3"
+        >
+          {practiceAreas.map((area, i) => (
             <motion.div
               key={area.id}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.1, duration: 0.8 }}
-              className="group"
+              transition={{ delay: i * 0.08, duration: 0.7 }}
             >
-              <div className="card-hover h-full">
-                <div className="card-body space-y-6">
-                  {/* Header */}
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`w-12 h-12 rounded-2xl bg-gradient-to-r bg-primary-500 flex items-center justify-center flex-shrink-0`}
-                    >
-                      <area.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="heading-h4">{area.title}</h3>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-body">{area.description}</p>
-
-                  {/* Features */}
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-semibold text-neutral-700 mb-3">
-                      Key Services:
-                    </h4>
-                    <ul className="space-y-2">
-                      {area.features.slice(0, 3).map((feature, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-center gap-2 text-sm text-neutral-600"
-                        >
-                          <ChevronRightIcon className="w-4 h-4 text-primary-400" />
-                          {feature}
-                        </li>
-                      ))}
-                      {area.features.length > 3 && (
-                        <li className="text-sm text-neutral-500 ml-6">
-                          +{area.features.length - 3} more services
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-
-                  {/* CTA */}
-                  <Link
-                    href={`/practice-areas/${area.id}`}
-                    className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-medium transition-colors group/link"
+              <div
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #E8E4DF",
+                  borderTop: "2px solid #B8860B",
+                  borderRadius: "8px",
+                  padding: "2rem",
+                  boxShadow: "0 1px 4px rgba(26,26,26,0.04)",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  transition: "all 200ms ease-out",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = "0 6px 18px rgba(26,26,26,0.07)";
+                  e.currentTarget.style.borderColor = "#C8C4BF";
+                  e.currentTarget.style.backgroundColor = "rgba(245,243,240,0.4)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = "0 1px 4px rgba(26,26,26,0.04)";
+                  e.currentTarget.style.borderColor = "#E8E4DF";
+                  e.currentTarget.style.backgroundColor = "#FFFFFF";
+                }}
+              >
+                {/* Header row */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: "1.25rem",
+                  }}
+                >
+                  <area.icon
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      color: "#B8860B",
+                      flexShrink: 0,
+                    }}
+                  />
+                  <div
+                    style={{
+                      fontFamily: '"IBM Plex Mono", monospace',
+                      fontSize: "0.6rem",
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      color: "#B8860B",
+                      padding: "4px 8px",
+                      border: "1px solid rgba(184,134,11,0.2)",
+                      borderRadius: "4px",
+                    }}
                   >
-                    Learn More
-                    <ArrowRightIcon className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" />
-                  </Link>
+                    Area {i + 1}
+                  </div>
                 </div>
+
+                <h3
+                  style={{
+                    fontFamily: '"Playfair Display", Georgia, serif',
+                    fontSize: "1.25rem",
+                    fontWeight: 600,
+                    color: "#1A1A1A",
+                    marginBottom: "0.75rem",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {area.title}
+                </h3>
+
+                <p
+                  style={{
+                    fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                    fontSize: "0.9rem",
+                    color: "#6B6B6B",
+                    lineHeight: 1.7,
+                    marginBottom: "1.5rem",
+                    flex: 1,
+                  }}
+                >
+                  {area.description}
+                </p>
+
+                {/* Feature list */}
+                <div
+                  style={{
+                    borderTop: "1px solid #F0EDE8",
+                    paddingTop: "1rem",
+                    marginBottom: "1.5rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.375rem",
+                  }}
+                >
+                  {area.features.slice(0, 3).map((f, fi) => (
+                    <div
+                      key={fi}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <span style={{ color: "#B8860B", fontSize: "0.5rem", flexShrink: 0 }}>◆</span>
+                      <span
+                        style={{
+                          fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                          fontSize: "0.825rem",
+                          color: "#4A4846",
+                        }}
+                      >
+                        {f}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Link */}
+                <Link
+                  href={`/practice-areas/${area.id}`}
+                  style={{
+                    fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                    fontSize: "0.775rem",
+                    fontWeight: 500,
+                    letterSpacing: "0.07em",
+                    textTransform: "uppercase",
+                    color: "#B8860B",
+                    textDecoration: "none",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.375rem",
+                    transition: "gap 200ms ease-out",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.gap = "0.625rem";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.gap = "0.375rem";
+                  }}
+                >
+                  Learn More
+                  <ArrowRightIcon style={{ width: "14px", height: "14px" }} />
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -235,58 +399,151 @@ export default function PracticeAreas() {
 
         {/* Process Section */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-3xl p-8 lg:p-12"
+          style={{
+            backgroundColor: "#1A1A1A",
+            borderRadius: "8px",
+            padding: "4rem 2rem",
+            position: "relative",
+            overflow: "hidden",
+          }}
         >
-          <div className="text-center mb-12">
-            <h3 className="heading-h3 mb-4">Our Legal Process</h3>
-            <p className="text-body max-w-2xl mx-auto">
+          {/* Ambient accent */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-100px",
+              right: "-100px",
+              width: "400px",
+              height: "400px",
+              background: "radial-gradient(circle, rgba(184,134,11,0.06) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: "3.5rem", position: "relative", zIndex: 1 }}>
+            <div
+              style={{
+                fontFamily: '"IBM Plex Mono", monospace',
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#B8860B",
+                marginBottom: "1rem",
+              }}
+            >
+              How We Work
+            </div>
+            <h3
+              style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+                fontWeight: 400,
+                color: "#FAFAF8",
+                letterSpacing: "-0.01em",
+                marginBottom: "0.875rem",
+              }}
+            >
+              Our Legal Process
+            </h3>
+            <p
+              style={{
+                fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                fontSize: "1rem",
+                color: "rgba(250, 250, 248, 0.55)",
+                maxWidth: "32rem",
+                margin: "0 auto",
+                lineHeight: 1.75,
+              }}
+            >
               We follow a systematic approach to ensure the best possible
-              outcome for your legal matters
+              outcome for your legal matters.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            <ProcessStep
-              number="1"
-              title="Consultation"
-              description="Free initial consultation to understand your legal needs and objectives"
-              delay={0.4}
+          {/* Steps — relative rule line */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 1,
+              display: "grid",
+              gap: "3rem",
+            }}
+            className="md:grid-cols-4"
+          >
+            {/* Connecting rule line */}
+            <div
+              className="hidden md:block"
+              style={{
+                position: "absolute",
+                top: "28px",
+                left: "calc(12.5% + 28px)",
+                right: "calc(12.5% + 28px)",
+                height: "1px",
+                backgroundColor: "rgba(184,134,11,0.2)",
+              }}
             />
-            <ProcessStep
-              number="2"
-              title="Analysis"
-              description="Thorough case analysis and legal research to develop the best strategy"
-              delay={0.5}
-            />
-            <ProcessStep
-              number="3"
-              title="Action"
-              description="Execute the legal strategy with meticulous attention to detail"
-              delay={0.6}
-            />
-            <ProcessStep
-              number="4"
-              title="Resolution"
-              description="Achieve favorable outcomes while keeping you informed throughout"
-              delay={0.7}
-            />
+
+            {processSteps.map((step, i) => (
+              <ProcessStep
+                key={step.title}
+                number={step.number}
+                title={step.title}
+                description={step.description}
+                index={i}
+                isInView={isInView}
+              />
+            ))}
           </div>
 
+          {/* CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="text-center mt-8"
+            transition={{ delay: 0.7, duration: 0.6 }}
+            style={{ textAlign: "center", marginTop: "3.5rem", position: "relative", zIndex: 1 }}
           >
-            <Link href="/consultation" className="btn-primary btn-lg group">
+            <Link
+              href="/consultation"
+              style={{
+                fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                fontSize: "0.8rem",
+                fontWeight: 500,
+                letterSpacing: "0.07em",
+                textTransform: "uppercase",
+                color: "#FFFFFF",
+                backgroundColor: "#B8860B",
+                padding: "0.875rem 2.5rem",
+                borderRadius: "6px",
+                textDecoration: "none",
+                border: "1px solid #B8860B",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                minHeight: "48px",
+                transition: "all 200ms ease-out",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#D4A84B";
+                e.currentTarget.style.borderColor = "#D4A84B";
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#B8860B";
+                e.currentTarget.style.borderColor = "#B8860B";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
               Start Your Case Today
-              <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+              <ArrowRightIcon style={{ width: "16px", height: "16px" }} />
             </Link>
           </motion.div>
         </motion.div>
+
       </div>
     </section>
   );

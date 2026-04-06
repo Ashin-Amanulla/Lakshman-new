@@ -3,362 +3,393 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRightIcon, ScaleIcon, BuildingOfficeIcon, UserGroupIcon } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const legalFacts = [
   {
     title: "Constitutional Excellence",
-    description: "Defending rights with constitutional precision and legal expertise",
+    description: "Defending rights with constitutional precision and dedicated legal expertise since 2020.",
     icon: ScaleIcon,
-    stat: "1000+ Cases Won"
+    stat: "100+ Cases Won",
   },
   {
     title: "Corporate Solutions",
-    description: "Comprehensive business law services for enterprises of all sizes",
+    description: "Comprehensive business law services for enterprises of all sizes across Kerala.",
     icon: BuildingOfficeIcon,
-    stat: "98% Success Rate"
+    stat: "Trusted Advice",
   },
   {
     title: "Family Protection",
-    description: "Compassionate legal support for family matters and personal disputes",
+    description: "Compassionate legal support for family matters and personal disputes with care.",
     icon: UserGroupIcon,
-    stat: "25+ Years Experience"
-  }
+    stat: "Personalized Support",
+  },
 ];
 
+const stats = [
+  { number: "100+", label: "Cases Handled" },
+  { number: "2020", label: "Established" },
+  { number: "10+", label: "Advocates" },
+  { number: "24/7", label: "Availability" },
+];
+
+const S = {
+  section: {
+    position: "relative",
+    minHeight: "100vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FAFAF8",
+    overflow: "hidden",
+  },
+  ambientGlow: {
+    position: "absolute",
+    top: "10%",
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "700px",
+    height: "500px",
+    background: "radial-gradient(ellipse, rgba(184,134,11,0.04) 0%, transparent 70%)",
+    pointerEvents: "none",
+  },
+  inner: {
+    position: "relative",
+    zIndex: 10,
+    width: "100%",
+    maxWidth: "64rem",
+    margin: "0 auto",
+    padding: "8rem 1.5rem 6rem",
+    textAlign: "center",
+  },
+};
+
 export default function Hero() {
-  const [currentHighlight, setCurrentHighlight] = useState(0);
   const [currentFact, setCurrentFact] = useState(0);
 
-  // Auto-rotate service highlights
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentFact((prev) => (prev + 1) % legalFacts.length);
-    }, 4000);
-
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
-  const scrollToContent = () => {
-    const nextSection = document.getElementById("stats-section");
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700">
-      {/* Animated Legal Background Pattern */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Legal Symbols */}
-        <div className="absolute inset-0 opacity-10">
-          {/* Justice Scale - Top Left */}
-          <motion.div
-            className="absolute top-20 left-20 text-white/30"
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 5, -5, 0]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
+    <section style={S.section}>
+      {/* Ambient glow */}
+      <div style={S.ambientGlow} />
+
+      {/* Subtle paper grain overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E\")",
+          pointerEvents: "none",
+          opacity: 0.5,
+        }}
+      />
+
+      <div style={S.inner}>
+
+        {/* Section Label */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            justifyContent: "center",
+            marginBottom: "2.5rem",
+          }}
+        >
+          <span style={{ flex: 1, maxWidth: "80px", height: "1px", backgroundColor: "#E8E4DF" }} />
+          <span
+            style={{
+              fontFamily: '"IBM Plex Mono", monospace',
+              fontSize: "0.65rem",
+              fontWeight: 500,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "#B8860B",
+              whiteSpace: "nowrap",
             }}
           >
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 6.5V4.5L17 3V1H7V3L9 4.5V6.5L3 7V9L9 8.5V15H10.5V22H13.5V15H15V8.5L21 9ZM7.5 7L8.5 6.5V8.5L7.5 9V7ZM16.5 7V9L15.5 8.5V6.5L16.5 7Z" />
-            </svg>
-          </motion.div>
+            Established 2020 · Kerala, India
+          </span>
+          <span style={{ flex: 1, maxWidth: "80px", height: "1px", backgroundColor: "#E8E4DF" }} />
+        </motion.div>
 
-          {/* Gavel - Top Right */}
-          <motion.div
-            className="absolute top-32 right-32 text-white/20"
-            animate={{
-              rotate: [0, 15, -15, 0],
-              scale: [1, 1.1, 1]
+        {/* Main Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.8, ease: "easeOut" }}
+          style={{
+            fontFamily: '"Playfair Display", Georgia, serif',
+            fontSize: "clamp(2.75rem, 7vw, 5rem)",
+            fontWeight: 400,
+            lineHeight: 1.08,
+            letterSpacing: "-0.02em",
+            color: "#1A1A1A",
+            margin: "0 auto 1.5rem",
+            maxWidth: "52rem",
+          }}
+        >
+          Legal Excellence
+          <br />
+          <em style={{ fontStyle: "italic", color: "#B8860B" }}>with Integrity</em>
+        </motion.h1>
+
+        {/* Decorative rule under headline */}
+        <motion.div
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+          style={{
+            height: "1px",
+            width: "64px",
+            backgroundColor: "#B8860B",
+            margin: "0 auto 2rem",
+            opacity: 0.5,
+          }}
+        />
+
+        {/* Subheading */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+          style={{
+            fontFamily: '"Source Sans 3", system-ui, sans-serif',
+            fontSize: "clamp(1rem, 2.5vw, 1.2rem)",
+            fontWeight: 400,
+            lineHeight: 1.75,
+            color: "#6B6B6B",
+            maxWidth: "42rem",
+            margin: "0 auto 3rem",
+            letterSpacing: "0.01em",
+          }}
+        >
+          Premier law firm in Kerala providing comprehensive legal solutions with
+          unwavering dedication and expertise. Your trusted legal partner since 2020.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45, duration: 0.8, ease: "easeOut" }}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "1rem",
+            justifyContent: "center",
+            marginBottom: "5rem",
+          }}
+        >
+          <Link
+            href="/consultation"
+            style={{
+              fontFamily: '"Source Sans 3", system-ui, sans-serif',
+              fontSize: "0.8rem",
+              fontWeight: 500,
+              letterSpacing: "0.07em",
+              textTransform: "uppercase",
+              color: "#FFFFFF",
+              backgroundColor: "#B8860B",
+              padding: "0.875rem 2.25rem",
+              borderRadius: "6px",
+              textDecoration: "none",
+              border: "1px solid #B8860B",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              minHeight: "48px",
+              transition: "all 200ms ease-out",
             }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#D4A84B";
+              e.currentTarget.style.borderColor = "#D4A84B";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "#B8860B";
+              e.currentTarget.style.borderColor = "#B8860B";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
-            <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2.5 20.5L5.5 17.5L7.91 19.91L4.91 22.91L2.5 20.5ZM12 2C13.1 2 14 2.9 14 4S13.1 6 12 6 10 5.1 10 4 10.9 2 12 2ZM21 12C21 13.1 20.1 14 19 14S17 13.1 17 12 17.9 10 19 10 21 10.9 21 12ZM6.34 6.34C6.73 5.95 7.36 5.95 7.75 6.34L17.66 16.25C18.05 16.64 18.05 17.27 17.66 17.66L16.25 19.07C15.86 19.46 15.23 19.46 14.84 19.07L4.93 9.16C4.54 8.77 4.54 8.14 4.93 7.75L6.34 6.34Z" />
-            </svg>
-          </motion.div>
-
-          {/* Dharma Wheel - Center Left */}
-          <motion.div
-            className="absolute top-1/2 left-10 text-white/15"
-            animate={{
-              rotate: [0, 360]
+            Get Free Consultation
+            <ArrowRightIcon style={{ width: "16px", height: "16px" }} />
+          </Link>
+          <Link
+            href="/practice-areas"
+            style={{
+              fontFamily: '"Source Sans 3", system-ui, sans-serif',
+              fontSize: "0.8rem",
+              fontWeight: 500,
+              letterSpacing: "0.07em",
+              textTransform: "uppercase",
+              color: "#1A1A1A",
+              backgroundColor: "transparent",
+              padding: "0.875rem 2.25rem",
+              borderRadius: "6px",
+              textDecoration: "none",
+              border: "1px solid #1A1A1A",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              minHeight: "48px",
+              transition: "all 200ms ease-out",
             }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#F5F3F0";
+              e.currentTarget.style.color = "#B8860B";
+              e.currentTarget.style.borderColor = "#B8860B";
             }}
-          >
-            <svg width="100" height="100" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C17.52 2 22 6.48 22 12S17.52 22 12 22 2 17.52 2 12 6.48 2 12 2ZM12 4C7.58 4 4 7.58 4 12S7.58 20 12 20 20 16.42 20 12 16.42 4 12 4ZM12 6C15.31 6 18 8.69 18 12S15.31 18 12 18 6 15.31 6 12 8.69 6 12 6ZM12 8C9.79 8 8 9.79 8 12S9.79 16 12 16 16 14.21 16 12 14.21 8 12 8ZM12 10C13.1 10 14 10.9 14 12S13.1 14 12 14 10 13.1 10 12 10.9 10 12 10Z" />
-            </svg>
-          </motion.div>
-
-          {/* Book/Constitution - Bottom Right */}
-          <motion.div
-            className="absolute bottom-32 right-20 text-white/25"
-            animate={{
-              y: [0, 15, 0],
-              x: [0, 10, 0]
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <svg width="70" height="70" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM18 4V18L12 15.5L6 18V4H18Z" />
-            </svg>
-          </motion.div>
-
-          {/* Pillar of Ashoka - Bottom Left */}
-          <motion.div
-            className="absolute bottom-20 left-32 text-white/20"
-            animate={{
-              scale: [1, 1.05, 1],
-              y: [0, -10, 0]
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut"
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.color = "#1A1A1A";
+              e.currentTarget.style.borderColor = "#1A1A1A";
             }}
           >
-            <svg width="50" height="90" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L13.09 5.26L16 4L14.74 7.09L18 8L14.74 8.91L16 12L13.09 10.74L12 14L10.91 10.74L8 12L9.26 8.91L6 8L9.26 7.09L8 4L10.91 5.26L12 2ZM12 18V22H10V18H12Z" />
-            </svg>
-          </motion.div>
+            Our Practice Areas
+          </Link>
+        </motion.div>
 
-          {/* Small floating particles */}
-          <motion.div
-            className="absolute top-40 left-1/3 w-2 h-2 bg-white/10 rounded-full"
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0.1, 0.3, 0.1]
+        {/* Stats Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+          style={{
+            borderTop: "1px solid #E8E4DF",
+            paddingTop: "2.5rem",
+          }}
+        >
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "0",
             }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0
-            }}
-          />
-          <motion.div
-            className="absolute top-60 right-1/3 w-3 h-3 bg-white/15 rounded-full"
-            animate={{
-              y: [0, -80, 0],
-              opacity: [0.15, 0.4, 0.15]
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2
-            }}
-          />
-          <motion.div
-            className="absolute bottom-40 left-1/4 w-1.5 h-1.5 bg-white/20 rounded-full"
-            animate={{
-              y: [0, -60, 0],
-              opacity: [0.2, 0.5, 0.2]
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 4
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Original overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-primary-900/20 to-transparent" />
-
-      <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[80vh]">
-          {/* Left Column - Main Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-left space-y-8"
+            className="grid-cols-2 sm:grid-cols-4"
           >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium"
-            >
-              <span className="w-2 h-2 bg-accent-400 rounded-full animate-pulse" />
-              25+ Years of Legal Excellence
-            </motion.div>
-
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className="heading-display text-white leading-tight"
+            {stats.map((stat, i) => (
+              <div
+                key={stat.label}
+                style={{
+                  textAlign: "center",
+                  padding: "0 1.5rem",
+                  borderRight: i < stats.length - 1 ? "1px solid #E8E4DF" : "none",
+                }}
+                className={i % 2 !== 1 && i !== stats.length - 1 ? "" : ""}
               >
-                Legal Excellence
-                <br />
-                <span className="bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">
-                  with Integrity
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-lead text-white/90 max-w-2xl mx-auto lg:mx-0"
-              >
-                Premier law firm in Kerala providing comprehensive legal
-                solutions with unwavering dedication and expertise. Your trusted
-                legal partner since 1999.
-              </motion.p>
-            </div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            >
-              <Link href="/consultation" className="btn-secondary btn-lg group">
-                Get Free Consultation
-                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-              <Link
-                href="/practice-areas"
-                className="btn-outline btn-lg border-white/30 text-white hover:bg-white hover:text-primary-600"
-              >
-                Our Practice Areas
-              </Link>
-            </motion.div>
-
-            {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex flex-wrap gap-8 justify-center lg:justify-start text-white/80"
-            >
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent-300">1000+</div>
-                <div className="text-sm">Cases Won</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent-300">98%</div>
-                <div className="text-sm">Success Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent-300">50+</div>
-                <div className="text-sm">Legal Experts</div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column - Service Highlights Carousel */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="relative w-full"
-          >
-            <div className="relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentFact}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20"
+                <div
+                  style={{
+                    fontFamily: '"Playfair Display", Georgia, serif',
+                    fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+                    fontWeight: 400,
+                    color: "#B8860B",
+                    letterSpacing: "-0.01em",
+                    lineHeight: 1,
+                    marginBottom: "0.5rem",
+                  }}
                 >
-                  {/* Icon */}
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg"
-                  >
-                    {React.createElement(legalFacts[currentFact].icon, { className: "w-10 h-10 text-white" })}
-                  </motion.div>
-
-                  {/* Content */}
-                  <div className="text-center space-y-4">
-                    <h3 className="text-2xl font-bold text-slate-800 leading-tight">
-                      {legalFacts[currentFact].title}
-                    </h3>
-
-                    <p className="text-slate-600 leading-relaxed px-2">
-                      {legalFacts[currentFact].description}
-                    </p>
-
-                    {/* Stat Badge */}
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="inline-flex items-center gap-2 bg-gradient-to-r from-slate-100 to-slate-200 px-6 py-3 rounded-full"
-                    >
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                      <span className="font-semibold text-slate-700">
-                        {legalFacts[currentFact].stat}
-                      </span>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Navigation Dots */}
-              <div className="flex justify-center gap-3 mt-8">
-                {legalFacts.map((_, index) => (
-                  <motion.button
-                    key={index}
-                    onClick={() => setCurrentFact(index)}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${currentFact === index
-                      ? "bg-blue-400 shadow-lg shadow-blue-400/50"
-                      : "bg-white/30 hover:bg-white/50"
-                      }`}
-                  />
-                ))}
+                  {stat.number}
+                </div>
+                <div
+                  style={{
+                    fontFamily: '"IBM Plex Mono", monospace',
+                    fontSize: "0.6rem",
+                    fontWeight: 500,
+                    letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                    color: "#6B6B6B",
+                  }}
+                >
+                  {stat.label}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
+            ))}
+          </div>
+        </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.button
+        {/* Rotating service highlight */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          onClick={scrollToContent}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 hover:text-white transition-colors group"
-          aria-label="Scroll to content"
+          transition={{ delay: 0.9, duration: 0.8 }}
+          style={{ marginTop: "3rem" }}
         >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-sm font-medium">Scroll to explore</span>
-            <ChevronDownIcon className="w-6 h-6 animate-bounce-gentle group-hover:translate-y-1 transition-transform duration-200" />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentFact}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.75rem",
+                padding: "0.625rem 1.25rem",
+                border: "1px solid #E8E4DF",
+                borderRadius: "4px",
+                backgroundColor: "#FFFFFF",
+                boxShadow: "0 1px 4px rgba(26,26,26,0.04)",
+              }}
+            >
+              <span
+                style={{
+                  width: "6px",
+                  height: "6px",
+                  borderRadius: "50%",
+                  backgroundColor: "#B8860B",
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                  fontSize: "0.875rem",
+                  color: "#6B6B6B",
+                }}
+              >
+                <strong style={{ color: "#1A1A1A", fontWeight: 600 }}>
+                  {legalFacts[currentFact].title}
+                </strong>
+                {" — "}
+                {legalFacts[currentFact].stat}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Dots */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1rem" }}>
+            {legalFacts.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentFact(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                style={{
+                  height: "1px",
+                  width: i === currentFact ? "24px" : "12px",
+                  backgroundColor: i === currentFact ? "#B8860B" : "#E8E4DF",
+                  border: "none",
+                  padding: 0,
+                  cursor: "pointer",
+                  transition: "all 300ms ease-out",
+                  borderRadius: "1px",
+                }}
+              />
+            ))}
           </div>
-        </motion.button>
+        </motion.div>
+
       </div>
     </section>
   );

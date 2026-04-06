@@ -1,25 +1,48 @@
 /* ==========================================================================
-   Tailwind CSS Imports
+   Serif Design System — SL Advocates
+   Typography: Playfair Display (display/heading) + Source Sans 3 (body) + IBM Plex Mono (labels)
    ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ==========================================================================
-   Modern CSS Variables for Light/Dark Mode Support
+   CSS Custom Properties — Serif Design Tokens
    ========================================================================== */
 @layer base {
   :root {
-    /* Animation durations */
+    /* Color Tokens */
+    --background: #FAFAF8;
+    --foreground: #1A1A1A;
+    --muted: #F5F3F0;
+    --muted-foreground: #6B6B6B;
+    --accent: #B8860B;
+    --accent-secondary: #D4A84B;
+    --accent-foreground: #FFFFFF;
+    --border: #E8E4DF;
+    --border-hover: #C8C4BF;
+    --card: #FFFFFF;
+    --ring: #B8860B;
+
+    /* Typography */
+    --font-serif: "Playfair Display", Georgia, serif;
+    --font-sans: "Source Sans 3", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(26, 26, 26, 0.04);
+    --shadow-md: 0 4px 12px rgba(26, 26, 26, 0.06);
+    --shadow-lg: 0 8px 24px rgba(26, 26, 26, 0.08);
+
+    /* Animation */
     --duration-fast: 150ms;
-    --duration-normal: 250ms;
-    --duration-slow: 350ms;
+    --duration-normal: 200ms;
+    --duration-slow: 300ms;
+    --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
 
-    /* Custom easings */
-    --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
-    --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
-
-    /* Z-index scale */
+    /* Z-index */
     --z-dropdown: 1000;
     --z-sticky: 1020;
     --z-fixed: 1030;
@@ -29,7 +52,7 @@
     --z-tooltip: 1070;
   }
 
-  /* Base HTML elements */
+  /* Base resets */
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -38,293 +61,456 @@
   }
 
   body {
-    @apply bg-white text-neutral-900 selection:bg-primary-100 selection:text-primary-900;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
   }
 
-  /* Typography improvements */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply text-balance;
+  /* Headings — Playfair Display */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
   }
 
   p {
-    @apply text-pretty;
+    text-wrap: pretty;
   }
 
-  /* Focus styles for accessibility */
+  /* Selection */
+  ::selection {
+    background-color: rgba(184, 134, 11, 0.15);
+    color: var(--foreground);
+  }
+
+  /* Focus states */
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-primary-500;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   /* Custom scrollbar */
   ::-webkit-scrollbar {
-    @apply w-2;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-neutral-100;
+    background: var(--muted);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-neutral-300 rounded-full;
+    background: var(--border-hover);
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-neutral-400;
+    background: var(--muted-foreground);
   }
 }
 
 /* ==========================================================================
-   Modern Component Classes
+   Serif Component Library
    ========================================================================== */
 @layer components {
-  /* Container with responsive padding */
+
+  /* Container */
   .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .container-sm {
+  .container-narrow {
     @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Modern Typography Scale */
+  /* ============================================================
+     Typography Scale
+     ============================================================ */
   .heading-display {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900;
+    font-family: var(--font-serif);
+    @apply text-5xl sm:text-6xl lg:text-7xl font-normal;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
   }
 
   .heading-h1 {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900;
+    font-family: var(--font-serif);
+    @apply text-4xl sm:text-5xl lg:text-6xl font-normal;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
 
   .heading-h2 {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900;
+    font-family: var(--font-serif);
+    @apply text-3xl sm:text-4xl lg:text-5xl font-normal;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
   }
 
   .heading-h3 {
-    @apply text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-neutral-900;
+    font-family: var(--font-serif);
+    @apply text-2xl sm:text-3xl font-semibold;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
   }
 
   .heading-h4 {
-    @apply text-lg sm:text-xl font-semibold tracking-tight text-neutral-900;
+    font-family: var(--font-serif);
+    @apply text-xl sm:text-2xl font-semibold;
+    line-height: 1.3;
   }
 
   .text-lead {
-    @apply text-lg sm:text-xl text-neutral-600 leading-relaxed;
+    font-family: var(--font-sans);
+    @apply text-lg sm:text-xl;
+    color: var(--muted-foreground);
+    line-height: 1.75;
+    letter-spacing: 0.01em;
   }
 
   .text-body {
-    @apply text-base text-neutral-700 leading-relaxed;
+    font-family: var(--font-sans);
+    @apply text-base;
+    color: var(--muted-foreground);
+    line-height: 1.75;
   }
 
-  .text-small {
-    @apply text-sm text-neutral-600;
+  /* ============================================================
+     Small Caps — Signature Element
+     ============================================================ */
+  .small-caps {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
 
-  /* Modern Button System */
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  .small-caps-neutral {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
   }
 
-  .btn-lg {
-    @apply px-8 py-4 text-base;
+  /* ============================================================
+     Section Label — Rule + Text + Rule Pattern
+     ============================================================ */
+  .section-label {
+    @apply flex items-center gap-4 mb-8;
   }
 
-  .btn-sm {
-    @apply px-4 py-2 text-sm;
+  .section-label-rule {
+    height: 1px;
+    flex: 1;
+    background-color: var(--border);
+  }
+
+  /* ============================================================
+     Horizontal Rules
+     ============================================================ */
+  .rule {
+    height: 1px;
+    background-color: var(--border);
+    @apply my-8;
+  }
+
+  .rule-accent {
+    height: 1px;
+    background-color: var(--accent);
+    @apply my-6;
+    opacity: 0.3;
+  }
+
+  /* ============================================================
+     Buttons — Serif System
+     ============================================================ */
+  .btn-serif {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
+    transition: all var(--duration-normal) ease-out;
+    min-height: 44px;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
   }
 
   .btn-primary {
-    @apply btn bg-primary-500 text-white hover:bg-primary-600 focus-visible:ring-primary-500 shadow-sm hover:shadow-md;
+    @apply btn-serif;
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
   }
 
-  .btn-secondary {
-    @apply btn bg-secondary-500 text-white hover:bg-secondary-600 focus-visible:ring-secondary-500 shadow-sm hover:shadow-md;
+  .btn-primary:hover {
+    background-color: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
   }
 
   .btn-outline {
-    @apply btn border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white focus-visible:ring-primary-500;
+    @apply btn-serif;
+    background-color: transparent;
+    color: var(--foreground);
+    border-color: var(--foreground);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--muted);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .btn-outline-light {
+    @apply btn-serif;
+    background-color: transparent;
+    color: rgba(250, 250, 248, 0.9);
+    border-color: rgba(250, 250, 248, 0.3);
+  }
+
+  .btn-outline-light:hover {
+    background-color: rgba(250, 250, 248, 0.1);
+    border-color: rgba(250, 250, 248, 0.6);
+    color: #FAFAF8;
   }
 
   .btn-ghost {
-    @apply btn text-neutral-700 hover:bg-neutral-100 focus-visible:ring-neutral-500;
+    @apply btn-serif;
+    background-color: transparent;
+    color: var(--muted-foreground);
+    border-color: transparent;
   }
 
-  /* Modern Card System */
-  .card {
-    @apply bg-white rounded-2xl shadow-soft border border-neutral-200/50 overflow-hidden transition-all duration-300;
+  .btn-ghost:hover {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
   }
 
-  .card-hover {
-    @apply card hover:shadow-medium hover:-translate-y-1;
+  /* ============================================================
+     Cards — Serif System
+     ============================================================ */
+  .card-serif {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) ease-out;
   }
 
-  .card-body {
-    @apply p-6;
+  .card-serif:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-hover);
+    background-color: rgba(245, 243, 240, 0.3);
   }
 
-  .card-header {
-    @apply p-6 pb-0;
+  .card-serif-accent {
+    @apply card-serif;
+    border-top: 2px solid var(--accent);
   }
 
-  .card-footer {
-    @apply p-6 pt-0;
+  .card-serif-elevated {
+    @apply card-serif;
+    box-shadow: var(--shadow-md);
   }
 
-  /* Form Elements */
+  /* ============================================================
+     Form Elements
+     ============================================================ */
   .form-group {
     @apply space-y-2;
   }
 
   .form-label {
-    @apply block text-sm font-medium text-neutral-700;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    display: block;
   }
 
-  .form-input {
-    @apply block w-full px-4 py-3 text-neutral-900 bg-white border border-neutral-300 rounded-xl shadow-sm placeholder:text-neutral-400 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 transition-colors;
+  .form-input-serif {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--foreground);
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    min-height: 44px;
+    transition: all var(--duration-fast) ease-out;
+    outline: none;
   }
 
-  .form-textarea {
-    @apply form-input min-h-[120px] resize-y;
+  .form-input-serif::placeholder {
+    color: rgba(107, 107, 107, 0.6);
   }
 
-  .form-select {
-    @apply form-input pr-10 bg-no-repeat bg-right bg-[length:16px_16px] bg-[position:right_12px_center];
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  .form-input-serif:hover {
+    border-color: var(--border-hover);
   }
 
-  /* Utility Classes */
+  .form-input-serif:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.12);
+  }
+
+  .form-textarea-serif {
+    @apply form-input-serif;
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  /* ============================================================
+     Section Spacing
+     ============================================================ */
   .section-padding {
-    @apply py-16 lg:py-24;
+    @apply py-24 lg:py-32;
+  }
+
+  .section-padding-lg {
+    @apply py-32 lg:py-40;
   }
 
   .section-padding-sm {
-    @apply py-12 lg:py-16;
+    @apply py-16 lg:py-20;
   }
 
-  .grid-auto-fit {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* ============================================================
+     Stat Display
+     ============================================================ */
+  .stat-number {
+    font-family: var(--font-serif);
+    @apply text-4xl sm:text-5xl font-normal;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.01em;
   }
 
-  .grid-auto-fill {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    margin-top: 0.5rem;
   }
 
-  /* Animation Classes */
-  .animate-in {
-    @apply opacity-0 translate-y-4;
-    animation: slide-in var(--duration-slow) var(--ease-out-cubic) forwards;
+  /* ============================================================
+     Paper texture overlay
+     ============================================================ */
+  .texture-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.3;
   }
 
-  .animate-in-delay-1 {
-    animation-delay: 100ms;
+  /* ============================================================
+     Animations
+     ============================================================ */
+  .animate-fade-in {
+    animation: serif-fade-in 0.6s ease-out forwards;
   }
 
-  .animate-in-delay-2 {
-    animation-delay: 200ms;
-  }
-
-  .animate-in-delay-3 {
-    animation-delay: 300ms;
-  }
-
-  /* Loading states */
-  .loading-skeleton {
-    @apply bg-neutral-200 animate-pulse rounded;
-  }
-
-  .loading-shimmer {
-    @apply relative overflow-hidden bg-neutral-200 rounded;
-  }
-
-  .loading-shimmer::after {
-    @apply absolute inset-0 -translate-x-full;
-    content: "";
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.6),
-      transparent
-    );
-    animation: shimmer 1.5s infinite;
-  }
-
-  /* Backdrop blur utilities */
-  .backdrop-blur-glass {
-    @apply backdrop-blur-md bg-white/80;
-  }
-
-  .backdrop-blur-glass-dark {
-    @apply backdrop-blur-md bg-neutral-900/80;
+  .animate-fade-up {
+    animation: serif-fade-up 0.8s ease-out forwards;
   }
 }
 
 /* ==========================================================================
-   Custom Animations
+   Keyframes
    ========================================================================== */
-@keyframes slide-in {
+@keyframes serif-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes serif-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes pulse-slow {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
 }
 
 /* ==========================================================================
-   Responsive Design Improvements
+   Responsive
    ========================================================================== */
 @media (max-width: 640px) {
   .container {
     @apply px-4;
   }
 
-  .btn {
-    @apply w-full justify-center;
+  .section-padding {
+    @apply py-16;
   }
 
-  .section-padding {
-    @apply py-12;
+  .section-padding-lg {
+    @apply py-20;
   }
 }
 
 /* ==========================================================================
-   Print Styles
+   Print
    ========================================================================== */
 @media print {
-  .no-print {
-    display: none !important;
-  }
-
-  body {
-    @apply text-neutral-900 bg-white;
-  }
+  .no-print { display: none !important; }
+  body { background: white; color: #1A1A1A; }
 }
 
 /* ==========================================================================
-   Reduced Motion Support
+   Reduced Motion
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

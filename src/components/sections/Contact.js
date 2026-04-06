@@ -4,62 +4,13 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import {
-  PhoneIcon,
-  EnvelopeIcon,
-  MapPinIcon,
-  ClockIcon,
-  ArrowRightIcon,
-  CalendarDaysIcon,
-  ChatBubbleLeftRightIcon,
-} from "@heroicons/react/24/outline";
+import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 
-const contactInfo = [
-  {
-    icon: PhoneIcon,
-    title: "Call Us",
-    content: "+91 98765 43210",
-    link: "tel:+919876543210",
-    description: "Available during office hours",
-  },
-  {
-    icon: EnvelopeIcon,
-    title: "Email Us",
-    content: "info@sladvocates.in",
-    link: "mailto:info@sladvocates.in",
-    description: "We'll respond within 24 hours",
-  },
-  {
-    icon: MapPinIcon,
-    title: "Visit Us",
-    content: "123 Legal Street, Kochi, Kerala 682001",
-    link: "https://maps.google.com",
-    description: "Easy access with parking available",
-  },
-  {
-    icon: ClockIcon,
-    title: "Office Hours",
-    content: "Mon - Fri: 9:30 AM - 6:30 PM",
-    description: "Closed on weekends and holidays",
-  },
-];
-
-const quickActions = [
-  {
-    title: "Free Consultation",
-    description:
-      "Schedule a no-obligation consultation to discuss your legal needs",
-    icon: ChatBubbleLeftRightIcon,
-    link: "/contact",
-    color: "from-primary-500 to-primary-600",
-  },
-  // {
-  //   title: "Book Appointment",
-  //   description: "Schedule a meeting with one of our experienced attorneys",
-  //   icon: CalendarDaysIcon,
-  //   link: "/contact",
-  //   color: "from-secondary-500 to-secondary-600",
-  // },
+const ctaStats = [
+  { number: "24/7", label: "Emergency Support" },
+  { number: "Free", label: "Initial Consultation" },
+  { number: "2020", label: "Established" },
+  { number: "10+", label: "Advocates" },
 ];
 
 export default function Contact() {
@@ -68,70 +19,240 @@ export default function Contact() {
 
   return (
     <section
-      className="section-padding bg-gradient-to-b from-neutral-50 to-white"
       ref={ref}
+      style={{ backgroundColor: "#FAFAF8", padding: "6rem 0" }}
     >
       <div className="container">
-        {/* Section Header */}
-     
 
-
-        {/* CTA Section */}
+        {/* Dark CTA Block */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="bg-primary-500 rounded-3xl p-8 lg:p-12 text-white text-center relative overflow-hidden"
+          transition={{ delay: 0.15, duration: 0.8 }}
+          style={{
+            backgroundColor: "#1A1A1A",
+            borderRadius: "8px",
+            padding: "5rem 2rem",
+            textAlign: "center",
+            position: "relative",
+            overflow: "hidden",
+          }}
         >
-          {/* Background Pattern */}
-          <div className="absolute inset-0 bg-[url('/images/legal-pattern.svg')] opacity-10" />
+          {/* Ambient glow */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-120px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "600px",
+              height: "500px",
+              background: "radial-gradient(ellipse, rgba(184,134,11,0.07) 0%, transparent 65%)",
+              pointerEvents: "none",
+            }}
+          />
 
-          <div className="relative z-10 max-w-3xl mx-auto">
-            <h3 className="heading-h3 text-white mb-4">
+          {/* Top rule accent */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "64px",
+              height: "2px",
+              backgroundColor: "#B8860B",
+              opacity: 0.7,
+            }}
+          />
+
+          <div style={{ position: "relative", zIndex: 1, maxWidth: "44rem", margin: "0 auto" }}>
+
+            {/* Section label */}
+            <div
+              style={{
+                fontFamily: '"IBM Plex Mono", monospace',
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#B8860B",
+                marginBottom: "1.5rem",
+              }}
+            >
+              Legal Assistance
+            </div>
+
+            <h2
+              style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: "clamp(2rem, 5vw, 3rem)",
+                fontWeight: 400,
+                color: "#FAFAF8",
+                letterSpacing: "-0.01em",
+                lineHeight: 1.2,
+                marginBottom: "0.75rem",
+              }}
+            >
               Need Legal Assistance?
-            </h3>
-            <p className="text-lg text-white/90 mb-8">
-              Don't let legal issues overwhelm you. Our experienced team is
-              ready to provide the guidance and representation you need to
-              protect your interests.
+            </h2>
+
+            {/* Decorative rule */}
+            <div
+              style={{
+                height: "1px",
+                width: "48px",
+                backgroundColor: "#B8860B",
+                margin: "0 auto 1.75rem",
+                opacity: 0.4,
+              }}
+            />
+
+            <p
+              style={{
+                fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                fontSize: "1.05rem",
+                color: "rgba(250, 250, 248, 0.65)",
+                lineHeight: 1.75,
+                marginBottom: "2.75rem",
+              }}
+            >
+              {"Don't"} let legal issues overwhelm you. Our experienced team is ready to
+              provide the guidance and representation you need to protect your interests.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/consultation" className="btn-secondary btn-lg">
+
+            {/* CTA Buttons */}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "1rem",
+                justifyContent: "center",
+                marginBottom: "4rem",
+              }}
+            >
+              <Link
+                href="/consultation"
+                style={{
+                  fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                  fontSize: "0.8rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.07em",
+                  textTransform: "uppercase",
+                  color: "#FFFFFF",
+                  backgroundColor: "#B8860B",
+                  padding: "0.875rem 2.25rem",
+                  borderRadius: "6px",
+                  textDecoration: "none",
+                  border: "1px solid #B8860B",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  minHeight: "48px",
+                  transition: "all 200ms ease-out",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#D4A84B";
+                  e.currentTarget.style.borderColor = "#D4A84B";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#B8860B";
+                  e.currentTarget.style.borderColor = "#B8860B";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
                 Free Consultation
-                <PhoneIcon className="w-5 h-5" />
+                <PhoneIcon style={{ width: "16px", height: "16px" }} />
               </Link>
+
               <Link
                 href="/contact"
-                className="btn-outline btn-lg border-white/30 text-white hover:bg-white hover:text-primary-600"
+                style={{
+                  fontFamily: '"Source Sans 3", system-ui, sans-serif',
+                  fontSize: "0.8rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.07em",
+                  textTransform: "uppercase",
+                  color: "rgba(250, 250, 248, 0.85)",
+                  backgroundColor: "transparent",
+                  padding: "0.875rem 2.25rem",
+                  borderRadius: "6px",
+                  textDecoration: "none",
+                  border: "1px solid rgba(250, 250, 248, 0.25)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  minHeight: "48px",
+                  transition: "all 200ms ease-out",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "rgba(250, 250, 248, 0.08)";
+                  e.currentTarget.style.borderColor = "rgba(250, 250, 248, 0.5)";
+                  e.currentTarget.style.color = "#FAFAF8";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.borderColor = "rgba(250, 250, 248, 0.25)";
+                  e.currentTarget.style.color = "rgba(250, 250, 248, 0.85)";
+                }}
               >
                 Contact Us
-                <EnvelopeIcon className="w-5 h-5" />
+                <EnvelopeIcon style={{ width: "16px", height: "16px" }} />
               </Link>
             </div>
 
-            {/* Trust indicators */}
-            <div className="flex flex-wrap gap-8 justify-center mt-12 pt-8 border-t border-white/20">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent-300">24/7</div>
-                <div className="text-sm text-white/80">Emergency Support</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent-300">Free</div>
-                <div className="text-sm text-white/80">
-                  Initial Consultation
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent-300">25+</div>
-                <div className="text-sm text-white/80">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent-300">98%</div>
-                <div className="text-sm text-white/80">Success Rate</div>
+            {/* Stats Rule + Row */}
+            <div style={{ borderTop: "1px solid rgba(232, 228, 223, 0.12)", paddingTop: "3rem" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gap: "0",
+                }}
+                className="grid-cols-2 sm:grid-cols-4"
+              >
+                {ctaStats.map((stat, i) => (
+                  <div
+                    key={stat.label}
+                    style={{
+                      textAlign: "center",
+                      padding: "0 1rem",
+                      borderRight: i < ctaStats.length - 1 ? "1px solid rgba(232, 228, 223, 0.12)" : "none",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
+                        fontWeight: 400,
+                        color: "#D4A84B",
+                        letterSpacing: "-0.01em",
+                        lineHeight: 1,
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      {stat.number}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: '"IBM Plex Mono", monospace',
+                        fontSize: "0.6rem",
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        color: "rgba(250, 250, 248, 0.4)",
+                      }}
+                    >
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+
           </div>
         </motion.div>
+
       </div>
     </section>
   );

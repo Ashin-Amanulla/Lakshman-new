@@ -4,25 +4,27 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import PracticeAreas from "@/components/sections/PracticeAreas";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import Contact from "@/components/sections/Contact";
 import DisclaimerModal from "@/components/common/DisclaimerModal";
-import { motion } from "framer-motion";
-import Hero2 from "@/components/sections/Hero2";
 
 export default function HomePage() {
   return (
     <>
       <PageWrapper>
-        {/* Hero Section */}
+        {/* Hero */}
         <Hero />
 
-        {/* About & Stats Section */}
+        {/* About & Stats */}
         <About />
 
-        {/* Practice Areas Section */}
+        {/* Practice Areas */}
         <PracticeAreas />
 
-        {/* Contact Section */}
+        {/* Why Choose Us */}
+        <WhyChooseUs />
+
+        {/* Contact CTA */}
         <Contact />
       </PageWrapper>
 

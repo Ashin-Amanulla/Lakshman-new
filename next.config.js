@@ -21,11 +21,6 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
 
-  // Experimental features for better performance
-  experimental: {
-    scrollRestoration: true,
-  },
-
   // Headers for security and performance
   async headers() {
     return [
