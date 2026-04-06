@@ -46,6 +46,9 @@ export default function TeamMemberPage({ params }) {
                                     src={member.image}
                                     alt={member.name}
                                     fill
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                    quality={72}
+                                    priority
                                     className="object-cover grayscale hover:grayscale-0 transition-all duration-300"
                                 />
                             </div>
