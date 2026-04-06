@@ -14,7 +14,7 @@ import {
     UserCircleIcon
 } from '@heroicons/react/24/outline'
 import PageWrapper from '@/components/layout/PageWrapper'
-import { team } from './data'
+import { team, getMemberExperience } from './data'
 
 // Team member image component with fallback
 function TeamMemberImage({ member }) {
@@ -108,7 +108,7 @@ export default function TeamPage() {
                                         <div className="space-y-3 mb-6">
                                             <div className="flex items-center gap-2">
                                                 <BriefcaseIcon className="w-5 h-5 text-secondary" />
-                                                <span className="text-sm">{member.experience}</span>
+                                                <span className="text-sm">{getMemberExperience(member)}</span>
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <GlobeAltIcon className="w-5 h-5 text-secondary" />
@@ -201,7 +201,7 @@ export default function TeamPage() {
                                             <div className="space-y-3 mb-6">
                                                 <div className="flex items-center gap-2">
                                                     <BriefcaseIcon className="w-5 h-5 text-secondary" />
-                                                    <span className="text-sm">{member.experience}</span>
+                                                    <span className="text-sm">{getMemberExperience(member)}</span>
                                                 </div>
                                                 <div className="flex items-center gap-2">
                                                     <GlobeAltIcon className="w-5 h-5 text-secondary" />

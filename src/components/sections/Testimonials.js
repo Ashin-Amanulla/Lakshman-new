@@ -1,148 +1,293 @@
-"use client"
+"use client";
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import Image from 'next/image'
-import { StarIcon } from '@heroicons/react/24/solid'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 const testimonials = [
   {
     id: 1,
-    content: "SL Advocates provided exceptional legal support during our company's merger. Their expertise and attention to detail were invaluable.",
+    content:
+      "SL Advocates provided exceptional legal support during our company's merger. Their expertise and attention to detail were invaluable in navigating every complexity.",
     author: "Rajesh Mehta",
     position: "CEO, TechCorp India",
-    image: "/images/testimonials/client1.jpg",
-    rating: 5
+    rating: 5,
   },
   {
     id: 2,
-    content: "Their team's understanding of international law helped us navigate complex cross-border transactions seamlessly.",
-    author: "Sarah Johnson",
-    position: "Director, Global Ventures",
-    image: "/images/testimonials/client2.jpg",
-    rating: 5
+    content:
+      "SL Advocates handled our property documentation and registration matter with exceptional diligence. Their deep knowledge of Kerala property laws saved us from a potentially costly dispute.",
+    author: "Anitha Krishnan",
+    position: "Property Owner, Thrissur",
+    rating: 5,
   },
   {
     id: 3,
-    content: "Professional, responsive, and thorough in their approach. They helped us resolve a complex property dispute efficiently.",
+    content:
+      "Professional, responsive, and thorough in their approach. They helped us resolve a complex property dispute efficiently and with great care.",
     author: "Priya Sharma",
     position: "Real Estate Developer",
-    image: "/images/testimonials/client3.jpg",
-    rating: 5
-  }
-]
+    rating: 5,
+  },
+];
 
 export default function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const nextTestimonial = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length)
-  }
+  const prev = () =>
+    setActiveIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
+  const next = () =>
+    setActiveIndex((i) => (i + 1) % testimonials.length);
 
-  const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+  const active = testimonials[activeIndex];
 
   return (
-    <section className="py-20 bg-primary text-white overflow-hidden">
-      <div className="container relative">
-        {/* Background Elements */}
-        <div className="absolute top-0 right-0 text-white/5">
-          <svg className="w-64 h-64" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/>
-          </svg>
-        </div>
+    <section style={{ backgroundColor: "#FFFFFF", padding: "6rem 0", position: "relative", overflow: "hidden" }}>
+      {/* Ambient glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "600px",
+          height: "400px",
+          background: "radial-gradient(ellipse, rgba(184,134,11,0.04) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
-        {/* Header */}
+      <div className="container" style={{ position: "relative", zIndex: 1 }}>
+
+        {/* Section Label */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            justifyContent: "center",
+            marginBottom: "1.25rem",
+          }}
+        >
+          <span style={{ flex: 1, maxWidth: "120px", height: "1px", backgroundColor: "#E8E4DF" }} />
+          <span
+            style={{
+              fontFamily: '"IBM Plex Mono", monospace',
+              fontSize: "0.65rem",
+              fontWeight: 500,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "#B8860B",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Client Testimonials
+          </span>
+          <span style={{ flex: 1, maxWidth: "120px", height: "1px", backgroundColor: "#E8E4DF" }} />
+        </motion.div>
+
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16 relative"
+          transition={{ duration: 0.8 }}
+          style={{ textAlign: "center", marginBottom: "4rem" }}
         >
-          <h2 className="text-sm font-semibold text-secondary uppercase tracking-wider mb-3">
-            Testimonials
-          </h2>
-          <h3 className="text-4xl font-heading mb-6">
+          <h2
+            style={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: "clamp(2rem, 5vw, 3rem)",
+              fontWeight: 400,
+              color: "#1A1A1A",
+              letterSpacing: "-0.01em",
+              lineHeight: 1.2,
+            }}
+          >
             What Our Clients Say
-          </h3>
-          <div className="w-20 h-1 bg-secondary mx-auto" />
+          </h2>
         </motion.div>
 
-        {/* Testimonials Slider */}
-        <div className="max-w-4xl mx-auto px-8">
+        {/* Testimonial Block */}
+        <div style={{ maxWidth: "48rem", margin: "0 auto" }}>
           <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white/10 backdrop-blur-sm rounded-lg p-8 md:p-12"
+            key={active.id}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
           >
-            {/* Rating */}
-            <div className="flex justify-center mb-6">
-              {[...Array(testimonials[activeIndex].rating)].map((_, i) => (
-                <StarIcon key={i} className="w-6 h-6 text-secondary" />
+            {/* Large decorative quote mark */}
+            <div
+              style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: "6rem",
+                fontWeight: 400,
+                color: "#B8860B",
+                lineHeight: 0.8,
+                marginBottom: "1.5rem",
+                textAlign: "center",
+                opacity: 0.3,
+                letterSpacing: "-0.05em",
+              }}
+              aria-hidden="true"
+            >
+              "
+            </div>
+
+            {/* Quote */}
+            <blockquote
+              style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)",
+                fontStyle: "italic",
+                fontWeight: 400,
+                color: "#1A1A1A",
+                lineHeight: 1.6,
+                textAlign: "center",
+                marginBottom: "2.5rem",
+              }}
+            >
+              "{active.content}"
+            </blockquote>
+
+            {/* Stars */}
+            <div style={{ textAlign: "center", marginBottom: "1.25rem" }}>
+              {Array.from({ length: active.rating }).map((_, i) => (
+                <span
+                  key={i}
+                  style={{ color: "#B8860B", fontSize: "0.9rem", letterSpacing: "0.15em" }}
+                >
+                  ★
+                </span>
               ))}
             </div>
 
-            {/* Content */}
-            <blockquote className="text-xl md:text-2xl text-center mb-8">
-              "{testimonials[activeIndex].content}"
-            </blockquote>
+            {/* Thin rule */}
+            <div style={{ height: "1px", backgroundColor: "#E8E4DF", width: "48px", margin: "0 auto 1.5rem" }} />
 
-            {/* Author */}
-            <div className="flex items-center justify-center">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4">
-                <Image
-                  src={testimonials[activeIndex].image}
-                  alt={testimonials[activeIndex].author}
-                  fill
-                  className="object-cover"
-                />
+            {/* Author info */}
+            <div style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  fontFamily: '"Playfair Display", Georgia, serif',
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                  color: "#1A1A1A",
+                  marginBottom: "0.25rem",
+                }}
+              >
+                {active.author}
               </div>
-              <div className="text-left">
-                <div className="font-heading text-lg">
-                  {testimonials[activeIndex].author}
-                </div>
-                <div className="text-white/80 text-sm">
-                  {testimonials[activeIndex].position}
-                </div>
+              <div
+                style={{
+                  fontFamily: '"IBM Plex Mono", monospace',
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#B8860B",
+                }}
+              >
+                {active.position}
               </div>
             </div>
           </motion.div>
 
-          {/* Navigation Buttons */}
-          <div className="flex justify-center mt-8 gap-4">
+          {/* Navigation */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "1.5rem",
+              marginTop: "2.5rem",
+            }}
+          >
             <button
-              onClick={prevTestimonial}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300"
+              onClick={prev}
+              aria-label="Previous testimonial"
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "1px solid #E8E4DF",
+                backgroundColor: "transparent",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#6B6B6B",
+                transition: "all 200ms ease-out",
+                fontSize: "1rem",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "#B8860B";
+                e.currentTarget.style.color = "#B8860B";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "#E8E4DF";
+                e.currentTarget.style.color = "#6B6B6B";
+              }}
             >
-              <ChevronLeftIcon className="w-6 h-6" />
+              ←
             </button>
-            <button
-              onClick={nextTestimonial}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300"
-            >
-              <ChevronRightIcon className="w-6 h-6" />
-            </button>
-          </div>
 
-          {/* Dots */}
-          <div className="flex justify-center mt-6 gap-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === activeIndex ? 'bg-secondary w-6' : 'bg-white/30'
-                }`}
-              />
-            ))}
+            {/* Dots */}
+            <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  aria-label={`Testimonial ${i + 1}`}
+                  style={{
+                    height: "1px",
+                    width: i === activeIndex ? "28px" : "14px",
+                    backgroundColor: i === activeIndex ? "#B8860B" : "#E8E4DF",
+                    border: "none",
+                    padding: "3px 0",
+                    cursor: "pointer",
+                    transition: "all 300ms ease-out",
+                    borderRadius: "1px",
+                  }}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={next}
+              aria-label="Next testimonial"
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "1px solid #E8E4DF",
+                backgroundColor: "transparent",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#6B6B6B",
+                transition: "all 200ms ease-out",
+                fontSize: "1rem",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "#B8860B";
+                e.currentTarget.style.color = "#B8860B";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "#E8E4DF";
+                e.currentTarget.style.color = "#6B6B6B";
+              }}
+            >
+              →
+            </button>
           </div>
         </div>
+
       </div>
     </section>
-  )
-} 
+  );
+}

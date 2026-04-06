@@ -1,14 +1,30 @@
-import { Inter } from "next/font/google";
+import { Playfair_Display, Source_Sans_3, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/common/BackToTop";
 import WhatsAppButton from "@/components/common/WhatsAppButton";
 
-const inter = Inter({
+const playfair = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-source-sans",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const ibmMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-ibm-mono",
+  weight: ["400", "500"],
 });
 
 export const metadata = {
@@ -19,7 +35,7 @@ export const metadata = {
     template: "%s | SL Advocates - Legal Excellence & Integrity",
   },
   description:
-    "Leading law firm in Kerala providing expert legal services in civil litigation, corporate law, family law, and property matters. 25+ years of experience with 98% success rate.",
+    "Leading law firm in Kerala providing expert legal services in civil litigation, corporate law, family law, and property matters.",
   keywords: [
     "law firm Kerala",
     "legal services Kochi",
@@ -47,7 +63,7 @@ export const metadata = {
     siteName: "SL Advocates",
     title: "SL Advocates - Premier Legal Services in Kerala",
     description:
-      "Leading law firm in Kerala providing expert legal services in civil litigation, corporate law, family law, and property matters. 25+ years of experience with 98% success rate.",
+      "Leading law firm in Kerala providing expert legal services in civil litigation, corporate law, family law, and property matters.",
     images: [
       {
         url: "/images/og-image.jpg",
@@ -61,7 +77,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "SL Advocates - Premier Legal Services in Kerala",
     description:
-      "Leading law firm in Kerala providing expert legal services. 25+ years experience, 98% success rate.",
+      "Leading law firm in Kerala providing expert legal services.",
     images: ["/images/og-image.jpg"],
     creator: "@sladvocates",
   },
@@ -130,17 +146,7 @@ const jsonLd = {
     "@type": "Person",
     name: "Advocate S.L.",
   },
-  employee: [
-    {
-      "@type": "Person",
-      name: "Advocate S.L.",
-      jobTitle: "Senior Partner",
-    },
-  ],
-  hasCredential: {
-    "@type": "EducationalOccupationalCredential",
-    credentialCategory: "Law Degree",
-  },
+  foundingDate: "2020",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.9",
@@ -152,7 +158,10 @@ const jsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html
+      lang="en"
+      className={`${playfair.variable} ${sourceSans.variable} ${ibmMono.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
@@ -177,12 +186,12 @@ export default function RootLayout({ children }) {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#1a365d" />
+        <meta name="theme-color" content="#B8860B" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="format-detection" content="telephone=no" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className="antialiased">
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-1 pt-20">{children}</main>

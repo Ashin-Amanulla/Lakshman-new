@@ -1,3 +1,12 @@
+/** @param {{ practiceSince?: number, experience?: string }} member */
+export function getMemberExperience(member) {
+    if (typeof member.practiceSince === "number") {
+        const years = Math.max(1, new Date().getFullYear() - member.practiceSince);
+        return `${years}+ years`;
+    }
+    return member.experience ?? "";
+}
+
 export const team = [
     {
         name: "Adv. Lakshman RS",
@@ -7,7 +16,7 @@ export const team = [
             "LLM, National Law University, Delhi",
             "Specialized in Corporate Law"
         ],
-        experience: "5+ years",
+        practiceSince: 2018,
         expertise: [
             "Corporate Law",
             "Civil Litigation",
@@ -16,7 +25,7 @@ export const team = [
         languages: ["English", "Malayalam", "Hindi"],
         email: "lakshman@sladvocates.in",
         phone: "+91 98765 43210",
-        bio: "With over 5 years of experience, Adv. Lakshman leads our firm with expertise in corporate law and civil litigation. His strategic approach and deep understanding of complex legal matters have resulted in numerous successful outcomes for our clients."
+        bio: "Adv. Lakshman leads our firm with expertise in corporate law and civil litigation. His strategic approach and deep understanding of complex legal matters have resulted in numerous successful outcomes for our clients."
     },
     {
         name: "Adv. Sudakshina Prasad",
@@ -26,7 +35,7 @@ export const team = [
             "LLB, Kerala Law Academy",
             "Masters in Family Law"
         ],
-        experience: "12+ years",
+        practiceSince: 2020,
         expertise: [
             "Family Law",
             "Divorce Proceedings",
